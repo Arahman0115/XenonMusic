@@ -118,4 +118,3 @@ function App() {
 }
 
 export default App;
-//lyrics={songName === defaultSong ? '' : lyrics}

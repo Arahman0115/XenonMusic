@@ -5,6 +5,8 @@ import './index.css'
 function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission }) {
   const [artist, setArtist] = useState('');
   const [song, setSong] = useState('');
+  const youtubeApiKey = process.env.REACT_APP_YOUTUBE_API_KEY;
+
   const songInputRef = useRef(null);
   const artistInputRef = useRef(null);
   const clear = () => {
@@ -46,7 +48,7 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission }) {
       const youtubeRes = await axios.get('https://www.googleapis.com/youtube/v3/search', {
         params: {
           q: `${artist} ${song}`,
-          key: 'YOUTUBE API KEY HERE',
+          key: youtubeApiKey,
           part: 'snippet',
           type: 'video',
           maxResults: 1,
@@ -111,5 +113,3 @@ function LyricsDisplay({ lyrics }) {
   );
 }
 
-  //AIzaSyCaG0engay7HMucVGd10926r-m-YAo2Hs0
-  //sk-proj-Xm4sO0CjgDcnagA52IBeT3BlbkFJaepBgwMUornaMSkqXW6h
