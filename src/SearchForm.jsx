@@ -46,7 +46,7 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission }) {
       const youtubeRes = await axios.get('https://www.googleapis.com/youtube/v3/search', {
         params: {
           q: `${artist} ${song}`,
-          key: 'AIzaSyCaG0engay7HMucVGd10926r-m-YAo2Hs0',
+          key: 'YOUTUBE API KEY HERE',
           part: 'snippet',
           type: 'video',
           maxResults: 1,
