@@ -1,7 +1,7 @@
 //VideoPlayer.jsx
 function VideoPlayer({ videoId, className }) {
     if (!videoId) return null;
-    const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=0`
+    const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`
   
     return (
       <div className="flex justify-center mt-10">
