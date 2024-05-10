@@ -1,8 +1,4 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Xenon Music
+Provides a simple interface that allows you to interact with the lyrics of your favorite songs
+It uses the Youtube API, LyricsAPI and openAI API to retrieve information regarding songs.
+You must retrieve API keys for Youtube and openAI in order to use, on SearchForm.jsx you will be prompted to enter your Youtube API key, and on the MainBox.jsx you will be prompted to enter your openAI API key
