@@ -1,0 +1,388 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+@keyframes changeBackground {
+  0% {
+    background-color: #27d1ce; /* Start color */
+  }
+  50% {
+    background-color: #2388a9; /* Middle color */
+  }
+  100% {
+    background-color: #27d1ce; /* End color */
+  }
+}
+@keyframes changeTextColor {
+  0% {
+    color: #860000; /* Start color */
+  }
+  50% {
+    color: #000000; /* Middle color */
+  }
+  100% {
+    color: #860000; /* End color */
+  }
+
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  animation: changeBackground 30s infinite; 
+}
+
+@font-face {
+  font-family: 'Briem';
+  src: url('./fonts/Briem_Hand/static/BriemHand-Black.ttf') format('truetype');
+  /* Add additional font weights and styles if needed */
+}
+.lyricstag {
+  font-family: 'Briem', 'Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif';
+  font-size: 1.5em;
+  line-height: 1.5;
+  margin-top: 1rem;
+
+
+}
+h2 {
+  font-family: 'Briem', 'Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif';
+  font-size: 2.5em;
+  line-height: 1.1;
+  margin-top: 1rem;
+  margin-bottom: 5rem; /* Add margin to push the heading down */
+}
+h1 {
+  font-family: 'Briem', 'Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif';
+  font-size: 3.2em;
+  line-height: 1.1;
+  margin-top: 2rem;
+  margin-bottom: 5rem; /* Add margin to push the heading down */
+  text-align: center;
+}
+.xenon-text {
+  font-size: 8rem;
+  color: #ddcdcd; /* Red color */
+  text-align: start;
+  margin-top: 2rem; /* Adjust margin-top as needed */
+  margin-left: 5rem; /* Adjust margin-left as needed */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow effect */
+  z-index: 9999;
+
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #000000;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #ff6464;
+}
+.default-video {
+  margin-top: 20px; /* Adjust the value as needed */
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+input:focus {
+  border-color: rgb(235, 227, 227);
+  background-color: #13a9b7;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.5); /* Example: Add a box shadow */
+  outline: none;
+}
+input {
+  background-color: #22b3b1;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #000001;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+.highlightbutton {
+  background-color: #22b3b1;
+}
+.librarybutton {
+  background-color: #22b3b1;
+}
+#explosion-button {
+  padding: 3px 20px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #22b3b1;
+  border: none;
+  border-radius: 5px;
+
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s;
+}
+#clear-button {
+  padding: 3px 15px;
+  font-size: 18px;
+  margin-left: 5px;
+  color: #fff;
+  background-color: #22b3b1;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s;
+}
+#explosion-button:hover {
+  background-color: #ff6464;
+}
+#clear-button:hover {
+  background-color: #ff6464;
+}
+
+@keyframes explode {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+/* Explosion effect for the button */
+.explosion {
+  animation: explode 0.5s ease-out;
+}
+.container1 {
+  overflow-y: auto;
+  height:70%;
+  border-radius: 5px;
+
+
+}
+.container {
+  width: 80%;
+  height: 50px;
+  margin: 0 auto;
+}
+/* MainBoxcss */
+.gpt-message {
+  background-color: #22b3b1;
+  color: #ffffff;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.gpt-message .message-content {
+  background-color: #22b3b1;
+  color: #ffffff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+
+
+.user-message {
+  background-color: #22b3b1;
+  color: #ffffff;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+.user-message .message-content {
+  background-color: #22b3b1;
+  color: #ffffff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.message {
+  width: fit-content;
+  max-width: 80%;
+  margin-left: 100px;
+  text-align: justify;
+}
+
+.input-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 80%;  
+ 
+}
+.prompt-area textarea {
+  resize: vertical;
+  min-height: 10px;
+  max-height: 100px;
+  overflow: auto;
+  width: 80%; /* Adjust as needed */
+  border-radius: 5px;
+  padding-right: 60px;
+  text-align: left;
+}
+.text-area {
+  width: 80%;
+  height: 50px;
+ 
+}
+.text-area::placeholder {
+  color: red;
+}
+.textareachat {
+  background-color: #22b3b1;
+  color:#ddcdcd;
+}
+.textareachat::placeholder {
+  background-color: #22b3b1;
+  color:#ddcdcd;
+}
+
+.submit {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translatey(-50%) translateX(-150%);
+  background-color: #27d1ce;
+  color:#690707;
+  margin-bottom: 10px;
+  border: none;
+  color: #ffffff;
+}
+.submit:hover {
+  background-color: #1e9795;
+}
+.submit img{
+  width:20px;
+  height:20px;
+}
+.submit img:hover {
+  cursor: pointer;
+  background-color: #1e9795;
+}
+@keyframes popOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+.entry-content {
+ width: 800px;
+}
+.songname img {
+  display: flex;
+  justify-items: auto;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  filter: invert(1);
+}
+.message-exit {
+  animation: popOut 0.5s forwards;
+}
+.songcont {
+  background-color: #22b3b1;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.songcont2 {
+  background-color: #22b3b1;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  justify-self: ;
+
+}
+
+
+.songname {
+  background-color: #22b3b1;
+  color:#ffffff;
+  font-family:'Briem', 'Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif';
+  text-align: center;
+}
+.d-flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+.sender {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.searchfield {
+  display: flex;
+  justify-items: auto;
+}
+.removeentrybutton {
+  align-self: flex-end;
+  margin-top: auto;
+  background-color: #22b3b1;
+  color:#ffffff;
+  
+}
+.removeentrybutton:hover {
+  background-color: #1a918f;
+  color:#ffffff;
+  border-color: #ffffff;
+}
+
+.vidplayerdiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width:80%;
+  margin-left: 50px;
+}
+.video-player {
+  width: 500px;
+  height:400px;
+}
