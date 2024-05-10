@@ -24,8 +24,8 @@ function App() {
     const storedLibrary = localStorage.getItem('library4');
     return storedLibrary ? JSON.parse(storedLibrary) : {};
   });
-
-  // Fetch lyrics for the default song on mount
+  
+  console.log(import.meta.env.VITE_KEY);
   useEffect(() => {
     fetchDefaultLyrics();
   }, []);
@@ -82,7 +82,6 @@ function App() {
         <Navbar />
         <div>
           <h1 id='xenon-text' className="text-8xl font-bold text-white-500 mb-5">Xenon</h1>
-          
         </div>
         <Switch>
           <Route exact path="/">

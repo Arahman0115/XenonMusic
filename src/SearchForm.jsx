@@ -5,7 +5,7 @@ import './index.css'
 function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission }) {
   const [artist, setArtist] = useState('');
   const [song, setSong] = useState('');
-  const youtubeApiKey = process.env.REACT_APP_YOUTUBE_API_KEY;
+  const youtubeApiKey = import.meta.env.VITE_KEY;
 
   const songInputRef = useRef(null);
   const artistInputRef = useRef(null);

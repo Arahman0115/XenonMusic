@@ -3,7 +3,7 @@ import sendButton from './assets/arrow-button.webp';
 
 function MainBox({ lyrics}){
     const [input, setInput] = useState("");
-    const openAIKey = process.env.REACT_APP_OPENAI_API_KEY;
+    const openAIKey = import.meta.env.VITE_OPENAI_API_KEY;    
     const [clearingMessages, setClearingMessages] = useState(false);
 
     const [messages, setMessages] = useState([
