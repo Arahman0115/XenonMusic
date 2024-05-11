@@ -127,7 +127,10 @@ function MainBox({ lyrics}){
           <textarea className='textareachat px-3 py-3 text-left border-rounded border-red-200' placeholder="Send a message to LyricsInterpreterGPT..." value={input} onChange={handleChange}/>            
           <button className="submit ml-10 bg-red-500 mb-5" type="submit" onClick={handleSend}>
             <img src={sendButton} />
-            </button>                      </div>
+            </button> 
+                               
+            </div>
+            <button className="clear mr-10 bg-red-500 mb-5" type="submit" onClick={clearMessages}> Clear </button>  
   
             </div>
         </div>

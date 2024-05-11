@@ -318,6 +318,9 @@ input {
 .message-exit {
   animation: popOut 0.5s forwards;
 }
+.clear {
+  background-color: #22b3b1;
+}
 .songcont {
   background-color: #22b3b1;
   border-radius: 5px;
