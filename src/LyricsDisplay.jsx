@@ -1,7 +1,7 @@
 //LyricsDisplay.jsx
 import React, { useState } from 'react';
 
-function LyricsDisplay({ lyrics, videoId, songName, artistName, addToLibrary, onLibraryPage }) {
+function LyricsDisplay({ lyrics, videoId, songName, artistName, addToLibrary, onLibraryPage, handleAnalyzeClickProp }) {
   const [selectedText, setSelectedText] = useState('');
 
   // Function to handle highlighting the selected text
@@ -14,12 +14,16 @@ function LyricsDisplay({ lyrics, videoId, songName, artistName, addToLibrary, on
       );
     }
   };
-
+  const handleAnalyzeClick = () => {
+    handleAnalyzeClickProp(selectedText);
+  };
+  
   // Function to handle text selection
   const handleTextSelection = () => {
     const selection = window.getSelection();
     if (selection && selection.toString()) {
       setSelectedText(selection.toString());
+      console.log('Selected text:', selectedText);
     } else {
       setSelectedText('');
     }
@@ -38,6 +42,7 @@ function LyricsDisplay({ lyrics, videoId, songName, artistName, addToLibrary, on
       <button className="librarybutton px-5 py-2 ml-5" onClick={handleAddToLibraryClick}>
         Add to your Library
       </button>
+      
     </div>
   );
 
@@ -47,7 +52,7 @@ function LyricsDisplay({ lyrics, videoId, songName, artistName, addToLibrary, on
   }
 
   return (
-    <div className="text-center justify-end flex flex-col">
+    <div className="text-center justify-end flex flex-col px-5 ml-5">
       <h2 className="text-3xl font-bold text-black-500">Lyrics</h2>
       <div className="mx-auto max-w-xl overflow-y-auto max-h-80 mt-[-50px]" onMouseUp={handleTextSelection}>
         <pre id="lyrics-text" className="whitespace-pre-line">{lyrics}</pre>

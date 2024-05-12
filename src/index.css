@@ -271,6 +271,12 @@ input {
   background-color: #22b3b1;
   color:#ddcdcd;
 }
+.artistinput::placeholder {
+  color: rgb(208, 188, 188);
+}
+.songinput::placeholder {
+  color: rgb(208, 188, 188);
+}
 
 .submit {
   position: absolute;
@@ -388,4 +394,23 @@ input {
 .video-player {
   width: 500px;
   height:400px;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #049b8e; 
+  border-radius: 5px;
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.aboutcont {
+  background-color: #049b8e;
 }

@@ -1,7 +1,7 @@
 import React, {useState, useEffect } from 'react';
 import sendButton from './assets/arrow-button.webp';
 
-function MainBox({ lyrics}){
+function MainBox({ lyrics, selectedText }){
     const [input, setInput] = useState("");
     const openAIKey = import.meta.env.VITE_OPENAI_API_KEY;    
     const [clearingMessages, setClearingMessages] = useState(false);
@@ -22,6 +22,12 @@ function MainBox({ lyrics}){
           console.log("its happening");
         }
       }, [lyrics]); 
+      useEffect(() => {
+        if (selectedText ) {
+          handleSelectedTextSubmission(selectedText);
+          console.log("its happening");
+        }
+      }, [selectedText]); 
       const clearMessages = () => {
         setClearingMessages(true);
         setTimeout(() => {
@@ -29,18 +35,32 @@ function MainBox({ lyrics}){
           setClearingMessages(false);
         }, 500);
       };
+
     const handleLyricsSubmission = async (lyrics) => {
         const newMessage = {
           message: lyrics,
           sender: "user"
         };
-      
+ 
         const newMessages = [...messages, newMessage];
       
         setMessages(newMessages);
       
         await processMessageToChatGPT(newMessages);
       };
+    const handleSelectedTextSubmission = async (selectedText) => {
+        const newMessage = {
+          message: selectedText,
+          sender: "user"
+        };
+ 
+        const newMessages = [...messages, newMessage];
+      
+        setMessages(newMessages);
+      
+        await processMessageToChatGPT(newMessages);
+      };
+      
     const handleSend = async (event)=>{
         event.preventDefault()
         const newMessage = {

@@ -75,7 +75,7 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission }) {
   const renderInputs = !onLibraryPage && (
     <div> 
     <input
-    className='px-5 mr-10 border-2 bg-white-500 rounded-md text-center border-white-500 h-8 '
+    className=' artistinput px-5 mr-10 border-2 bg-white-500 rounded-md text-center border-white-500 h-8 '
     type="text"
     value={artist}
     onChange={(e) => setArtist(e.target.value)}
@@ -83,7 +83,7 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission }) {
     ref={artistInputRef}
   />
   <input
-    className='px-5 mr-10 mt-5 h-8 border-2 rounded-md text-center border-white-500 '
+    className='songinput px-5 mr-10 mt-5 h-8 border-2 rounded-md text-center border-white-500 '
     type="text"
     value={song}
     onChange={(e) => setSong(e.target.value)}
@@ -112,4 +112,4 @@ function LyricsDisplay({ lyrics }) {
     </div>
   );
 }
-
+//pLUm9_fBMtV-UsPN0Gd7bvgDG-DsRUZVzk9KiR-wMstI2PW9KweQVUwr8y77WnnS

@@ -1,5 +1,10 @@
 //App.jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Sphere, } from '@react-three/drei';
+import { MeshBasicMaterial } from 'three';
+
+
 import axios from 'axios';
 import SearchForm from './SearchForm';
 import LyricsDisplay from './LyricsDisplay';
@@ -19,22 +24,24 @@ function App() {
   const [songName, setSongName] = useState(defaultSong);
   const [videoId, setVideoId] = useState(defaultVideoId);
   const [lyrics, setLyrics] = useState('');
+  const[selectedText, setSelectedText] = useState('');
   const [libraryDict, setLibraryDict] = useState(() => {
     //const storedLibrary = localStorage.getItem('library2');
     const storedLibrary = localStorage.getItem('library4');
     return storedLibrary ? JSON.parse(storedLibrary) : {};
   });
   
-  console.log(import.meta.env.VITE_KEY);
   useEffect(() => {
     fetchDefaultLyrics();
   }, []);
 
+  
   // Update video and lyrics upon search results
  // const handleSearchResults = ({ videoId, lyrics }) => {
  //   setVideoId(videoId);
  //   setLyrics(lyrics);
  // };
+
  const handleSearchResults = ({ artist, song, lyrics, videoId }) => {
   console.log('handleSearchResults:', artist, song, videoId)
   setArtistName(artist);
@@ -58,6 +65,12 @@ function App() {
       console.error('Error fetching default lyrics:', error);
     }
   };
+  function handleMouseUp() {
+    const text = window.getSelection().toString();
+    setSelectedText(text);
+}
+
+
   useEffect(() => {
     localStorage.setItem('library4', JSON.stringify(libraryDict));
   }, [libraryDict]);
@@ -82,6 +95,7 @@ function App() {
         <Navbar />
         <div>
           <h1 id='xenon-text' className="text-8xl font-bold text-white-500 mb-5">Xenon</h1>
+          
         </div>
         <Switch>
           <Route exact path="/">
@@ -90,20 +104,32 @@ function App() {
               <div className="w-1/2 mr-2">
                 <VideoPlayer videoId={videoId} />
               </div>
-              <div className="w-1/2 ml-2">
-                <LyricsDisplay lyrics={lyrics} videoId={videoId} songName={songName} artistName={artistName} addToLibrary={addToLibrary} />
+              <div className="w-1/2 ml-2 flex flex-row ">
+                <LyricsDisplay  lyrics={lyrics} videoId={videoId} songName={songName} artistName={artistName} addToLibrary={addToLibrary} />
+                <div>
+                <button className="librarybutton px-15 py-23 ml-5 mt-60" onClick={handleMouseUp}>
+        Analyze
+      </button>
+                </div>
               </div>
               
             </div>
            
+            
             <SearchForm onSearchResults={handleSearchResults} onLyricsSubmission={handleLyricsSubmission} />            <div>
-            <MainBox lyrics={songName === defaultSong ? '' : lyrics}
-             />            
+            <div className='overflow-auto h-[600px]'> 
+            <MainBox selectedText={selectedText} lyrics={songName === defaultSong ? '' : lyrics}
+             />   
+            </div>
+                    
              </div>
             
           </Route>
           <Route path="/about">
-            <About />
+          <div className='mt-10'>
+          <About />
+
+          </div>
           </Route>
           <Route path="/library">
             <Library libraryDict={libraryDict} />
