@@ -76,7 +76,7 @@ const Library = ({ onLibraryPage }) => {
               </h3>
               {expanded[videoId] && (
                 <div className="entry-content">
-                <LyricsDisplay lyrics={lyrics} videoId={videoId} />
+                <LyricsDisplay lyrics={lyrics} onLibraryPage='true' videoId={videoId} />
                 <VideoPlayer videoId={videoId} />
                 <div className="chat-history">
                   <p className='chathistorytext text-3xl text-center font-bold mb-5 mt-5 underline underline-offset-7'>Chat History</p>

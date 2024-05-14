@@ -30,7 +30,7 @@
     }
   }
   h1 {
-    color: #0ca896; /* Slightly darker greenish-blue */
+    color: #000000; /* Slightly darker greenish-blue */
     margin-bottom: 20px;
     animation: slideIn 0.5s ease-in-out;
   }

@@ -48,12 +48,22 @@ a:hover {
   }
 
 }
-
+@keyframes changeBackgroundRed {
+  0% {
+    background-color: #861107; /* Start color */
+  }
+  50% {
+    background-color: #720404; /* Middle color */
+  }
+  100% {
+    background-color: #861107; /* End color */
+  }
+}
 body {
-  
+  justify-content:end;
   min-width: 320px;
   min-height: 100vh;
-  animation: changeBackground 30s infinite; 
+  animation: changeBackgroundRed 30s infinite; 
 }
 
 @font-face {
@@ -74,7 +84,8 @@ h2 {
   font-size: 2.5em;
   line-height: 1.1;
   margin-top: 1rem;
-  margin-bottom: 5rem; /* Add margin to push the heading down */
+  margin-bottom: 5rem;
+  color:#000000; /* Add margin to push the heading down */
 }
 @keyframes slideIn {
   from {
@@ -131,12 +142,15 @@ button:focus-visible {
 }
 input:focus {
   border-color: rgb(235, 227, 227);
-  background-color: #13a9b7;
+  background-color: #353a3a;
   box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.5); /* Example: Add a box shadow */
   outline: none;
 }
 input {
   background-color: #22b3b1;
+}
+input {
+  background-color: #000000;
 }
 
 @media (prefers-color-scheme: light) {
@@ -152,22 +166,22 @@ input {
   }
 }
 .highlightbutton {
-  background-color: #22b3b1;
+  background-color: #000000;
   border: none;
 
 }
 .highlightbutton:hover {
-  background-color: #067d8f;
+  background-color: #2d3030;
   border: none;
 
 
 }
 .librarybutton {
-  background-color: #22b3b1;
+  background-color: #000000;
   border: none;
 }
 .librarybutton:hover {
-  background-color: #067d8f;
+  background-color: #2d3030;
   border: none;
 
 }
@@ -175,7 +189,8 @@ input {
   padding: 3px 20px;
   font-size: 18px;
   color: #fff;
-  background-color: #22b3b1;
+  /*background-color: #22b3b1;*/
+  background-color: #000000;
   border: none;
   border-radius: 5px;
 
@@ -190,7 +205,8 @@ input {
   font-size: 18px;
   margin-left: 5px;
   color: #fff;
-  background-color: #22b3b1;
+  /*background-color: #22b3b1;*/
+  background-color: #000000;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -203,10 +219,10 @@ input {
   
 }
 #explosion-button:hover {
-  background-color: #067d8f;
+  background-color: #202323;
 }
 #clear-button:hover {
-  background-color: #067d8f;
+  background-color: #303232;
   border:none;
 }
 
@@ -253,7 +269,7 @@ input {
   }
 }
 .gpt-message {
-  background-color: #22a5b3;
+  background-color: #000000;
   color: #ffffff;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -263,7 +279,7 @@ input {
 }
 
 .gpt-message .message-content {
-  background-color: #22a5b3;
+  background-color: #000000;
   color: #ffffff;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   animation: slideInX .5s ease-in-out;
@@ -273,7 +289,7 @@ input {
 
 
 .user-message {
-  background-color: #199997;
+  background-color: #000000;
   color: #ffffff;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -282,7 +298,7 @@ input {
   animation: slideInXRight .5s ease-in-out;
 }
 .user-message .message-content {
-  background-color: #199997;
+  background-color: #000000;
   color: #ffffff;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
@@ -329,6 +345,7 @@ input {
 .artistinput::placeholder {
   color: rgb(208, 188, 188);
 }
+
 .songinput::placeholder {
   color: rgb(208, 188, 188);
 }
@@ -483,14 +500,14 @@ input {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #049b8e; 
+  background: #000000; 
   border-radius: 5px;
 
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #02897e; 
+  background: #202222; 
 }
 
 .aboutcont {
