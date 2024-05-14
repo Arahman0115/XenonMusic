@@ -5,6 +5,7 @@ function MainBox({ lyrics, selectedText, setMainBoxContent}){
     const [input, setInput] = useState("");
     const openAIKey = import.meta.env.VITE_OPENAI_API_KEY;    
     const [clearingMessages, setClearingMessages] = useState(false);
+    const [hasCleared, setHasCleared] = useState(false);
 
     const [messages, setMessages] = useState([
         {
@@ -18,14 +19,14 @@ function MainBox({ lyrics, selectedText, setMainBoxContent}){
 
     }
     useEffect(() => {
-        if (lyrics ) {
+        if (lyrics && !hasCleared) {
           handleLyricsSubmission(lyrics);
           console.log("its happening");
         }
       }, [lyrics]); 
 
       useEffect(() => {
-        if (selectedText ) {
+        if (selectedText && !hasCleared ) {
           handleSelectedTextSubmission(selectedText);
           console.log("its happening");
         }
@@ -35,6 +36,7 @@ function MainBox({ lyrics, selectedText, setMainBoxContent}){
         setTimeout(() => {
           setMessages([]);
           setClearingMessages(false);
+          setHasCleared(true);
         }, 500);
       };
 
@@ -103,7 +105,7 @@ function MainBox({ lyrics, selectedText, setMainBoxContent}){
         }
 
         const apiRequestBody = {
-            "model": "gpt-3.5-turbo",
+            "model": "gpt-4o",
             "messages": [
                 systemMessage,
                 ...apiMessages

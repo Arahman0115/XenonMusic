@@ -12,7 +12,6 @@ import LyricsDisplay from './LyricsDisplay';
 import VideoPlayer from './VideoPlayer';
 import Navbar from './Navbar';
 import About from './About';
-import HamburgerMenu from './HamburgerMenu';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Library from './Library';
 import * as THREE from 'three';
