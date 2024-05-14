@@ -1,4 +1,5 @@
 //App.jsx
+// Copilot: focus on LyricsDisplay.jsx 
 import { useState, useEffect, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Sphere, } from '@react-three/drei';
@@ -11,6 +12,7 @@ import LyricsDisplay from './LyricsDisplay';
 import VideoPlayer from './VideoPlayer';
 import Navbar from './Navbar';
 import About from './About';
+import HamburgerMenu from './HamburgerMenu';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Library from './Library';
 import * as THREE from 'three';
@@ -23,11 +25,13 @@ function App() {
   const [artistName, setArtistName] = useState(defaultArtist);
   const [songName, setSongName] = useState(defaultSong);
   const [videoId, setVideoId] = useState(defaultVideoId);
+  const [mainBoxContent, setMainBoxContent] = useState('');
   const [lyrics, setLyrics] = useState('');
   const[selectedText, setSelectedText] = useState('');
+  const [chatHistory, setChatHistory] = useState([]);
   const [libraryDict, setLibraryDict] = useState(() => {
     //const storedLibrary = localStorage.getItem('library2');
-    const storedLibrary = localStorage.getItem('library4');
+    const storedLibrary = localStorage.getItem('library6');
     return storedLibrary ? JSON.parse(storedLibrary) : {};
   });
   
@@ -35,7 +39,7 @@ function App() {
     fetchDefaultLyrics();
   }, []);
 
-  
+
   // Update video and lyrics upon search results
  // const handleSearchResults = ({ videoId, lyrics }) => {
  //   setVideoId(videoId);
@@ -45,12 +49,9 @@ function App() {
  const handleSearchResults = ({ artist, song, lyrics, videoId }) => {
   console.log('handleSearchResults:', artist, song, videoId)
   setArtistName(artist);
+  setMainBoxContent(mainBoxContent);
   setSongName(song);
   setVideoId(videoId);
-  setLibraryDict(prev => ({
-    ...prev,
-    [videoId]: { lyrics, songName: song, artistName: artist }
-  }));
 };
   const handleLyricsSubmission = (lyrics) => {
     setLyrics(lyrics);
@@ -72,17 +73,17 @@ function App() {
 
 
   useEffect(() => {
-    localStorage.setItem('library4', JSON.stringify(libraryDict));
+    localStorage.setItem('library6', JSON.stringify(libraryDict));
   }, [libraryDict]);
   // Function to add a song and lyrics to the library
   const addToLibrary = (videoId, lyrics, songName, artistName) => {
-    console.log('addToLibrary:', videoId, songName, artistName);
     setLibraryDict((prevState) => {
       // Check if the song is already in the library
       if (!prevState[videoId]) {
+        console.log(mainBoxContent)
         return {
           ...prevState,
-          [videoId]: { lyrics, songName, artistName }
+          [videoId]: { lyrics, songName, artistName, mainBoxContent }
         };
       }
       // If the song is already in the library, return the previous state
@@ -92,20 +93,29 @@ function App() {
   return (
     <Router>
       <div className="container mx-auto p-4">
+      <div className='flex flex-row'>
+      <div className='hamburger-container mr-10'>
+
+      </div>
+        <div> 
         <Navbar />
+        </div>
+        </div>
         <div>
           <h1 id='xenon-text' className="text-8xl font-bold text-white-500 mb-5">Xenon</h1>
           
         </div>
         <Switch>
           <Route exact path="/">
+          <div>          
+          </div>
             <div id="three-container" className="w-1/2 mr-2" />
             <div className="flex">
               <div className="w-1/2 mr-2">
                 <VideoPlayer videoId={videoId} />
               </div>
               <div className="w-1/2 ml-2 flex flex-row ">
-                <LyricsDisplay  lyrics={lyrics} videoId={videoId} songName={songName} artistName={artistName} addToLibrary={addToLibrary} />
+                <LyricsDisplay  lyrics={lyrics} videoId={videoId} songName={songName} artistName={artistName} mainBoxContent={mainBoxContent} addToLibrary={addToLibrary} />
                 <div>
                 <button className="librarybutton px-15 py-23 ml-5 mt-60" onClick={handleMouseUp}>
         Analyze
@@ -116,10 +126,11 @@ function App() {
             </div>
            
             
-            <SearchForm onSearchResults={handleSearchResults} onLyricsSubmission={handleLyricsSubmission} />            <div>
+            <SearchForm chatHistory={chatHistory} onSearchResults={handleSearchResults} onLyricsSubmission={handleLyricsSubmission} />            <div>
             <div className='overflow-auto h-[600px]'> 
-            <MainBox selectedText={selectedText} lyrics={songName === defaultSong ? '' : lyrics}
+            <MainBox setMainBoxContent={setMainBoxContent} onChatHistoryChange={setChatHistory} selectedText={selectedText} lyrics={songName === defaultSong ? '' : lyrics}
              />   
+
             </div>
                     
              </div>

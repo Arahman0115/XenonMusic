@@ -140,9 +140,23 @@ input {
 }
 .highlightbutton {
   background-color: #22b3b1;
+  border: none;
+
+}
+.highlightbutton:hover {
+  background-color: #067d8f;
+  border: none;
+
+
 }
 .librarybutton {
   background-color: #22b3b1;
+  border: none;
+}
+.librarybutton:hover {
+  background-color: #067d8f;
+  border: none;
+
 }
 #explosion-button {
   padding: 3px 20px;
@@ -171,12 +185,16 @@ input {
   position: relative;
   overflow: hidden;
   transition: background-color 0.3s;
+  border: none;
+
+  
 }
 #explosion-button:hover {
-  background-color: #ff6464;
+  background-color: #067d8f;
 }
 #clear-button:hover {
-  background-color: #ff6464;
+  background-color: #067d8f;
+  border:none;
 }
 
 @keyframes explode {
@@ -202,7 +220,7 @@ input {
 }
 /* MainBoxcss */
 .gpt-message {
-  background-color: #22b3b1;
+  background-color: #22a5b3;
   color: #ffffff;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -211,7 +229,7 @@ input {
 }
 
 .gpt-message .message-content {
-  background-color: #22b3b1;
+  background-color: #22a5b3;
   color: #ffffff;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
@@ -219,7 +237,7 @@ input {
 
 
 .user-message {
-  background-color: #22b3b1;
+  background-color: #199997;
   color: #ffffff;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -227,7 +245,7 @@ input {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 .user-message .message-content {
-  background-color: #22b3b1;
+  background-color: #199997;
   color: #ffffff;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
@@ -326,6 +344,11 @@ input {
 }
 .clear {
   background-color: #22b3b1;
+  border:none;
+}
+.clear:hover {
+  background-color: #1a918f;
+  border:none;
 }
 .songcont {
   background-color: #22b3b1;
@@ -408,9 +431,12 @@ input {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #02897e; 
 }
 
 .aboutcont {
   background-color: #049b8e;
+}
+.chathistorytext {
+  font-family: Briem, 'Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif';
 }

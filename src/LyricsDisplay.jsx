@@ -1,7 +1,7 @@
 //LyricsDisplay.jsx
 import React, { useState } from 'react';
 
-function LyricsDisplay({ lyrics, videoId, songName, artistName, addToLibrary, onLibraryPage, handleAnalyzeClickProp }) {
+function LyricsDisplay({ lyrics, videoId, songName, artistName, mainBoxContent, addToLibrary, onLibraryPage, handleAnalyzeClickProp }) {
   const [selectedText, setSelectedText] = useState('');
 
   // Function to handle highlighting the selected text
@@ -31,8 +31,8 @@ function LyricsDisplay({ lyrics, videoId, songName, artistName, addToLibrary, on
 
   // Handle adding to the library using the provided prop function
   const handleAddToLibraryClick = () => {
-    addToLibrary(videoId, lyrics, songName, artistName);
-    console.log('Calling addToLibrary with:', { videoId, lyrics, songName, artistName});
+    addToLibrary(videoId, lyrics, songName, artistName, mainBoxContent);
+    console.log('Calling addToLibrary with:', { videoId, lyrics, songName, artistName, mainBoxContent});
   };
   const renderButtons = !onLibraryPage && (
     <div className="flex ml-60 justify mt-5">

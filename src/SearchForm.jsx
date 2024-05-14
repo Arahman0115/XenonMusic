@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import MainBox from './Mainbox';
 import axios from 'axios';
 import './index.css'
 
@@ -59,7 +60,7 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission }) {
       const videoId = youtubeItems.length ? youtubeItems[0].id.videoId : '';
   
       // Pass the fetched data to the parent component's state
-      onSearchResults({ artist, song, lyrics, videoId });
+      onSearchResults({ artist, song, lyrics, videoId});
  
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -97,6 +98,7 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission }) {
     <div className='searchfield ml-5 flex justify-left mb-10'>
       {renderInputs}
       {renderButtons}
+
     </div>
   );
 }
@@ -112,4 +114,3 @@ function LyricsDisplay({ lyrics }) {
     </div>
   );
 }
-//pLUm9_fBMtV-UsPN0Gd7bvgDG-DsRUZVzk9KiR-wMstI2PW9KweQVUwr8y77WnnS

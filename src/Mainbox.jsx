@@ -1,7 +1,7 @@
 import React, {useState, useEffect } from 'react';
 import sendButton from './assets/arrow-button.webp';
 
-function MainBox({ lyrics, selectedText }){
+function MainBox({ lyrics, selectedText, setMainBoxContent}){
     const [input, setInput] = useState("");
     const openAIKey = import.meta.env.VITE_OPENAI_API_KEY;    
     const [clearingMessages, setClearingMessages] = useState(false);
@@ -9,12 +9,13 @@ function MainBox({ lyrics, selectedText }){
     const [messages, setMessages] = useState([
         {
             message: "Hello I am your Personal Lyrics Interpreter",
-            sender: "ChatGPT"
+            sender: "LyricsInterpreterGPT"
         }
     ]);
 
     const handleChange = (event)=>{
         setInput(event.target.value)
+
     }
     useEffect(() => {
         if (lyrics ) {
@@ -22,6 +23,7 @@ function MainBox({ lyrics, selectedText }){
           console.log("its happening");
         }
       }, [lyrics]); 
+
       useEffect(() => {
         if (selectedText ) {
           handleSelectedTextSubmission(selectedText);
@@ -39,7 +41,7 @@ function MainBox({ lyrics, selectedText }){
     const handleLyricsSubmission = async (lyrics) => {
         const newMessage = {
           message: lyrics,
-          sender: "user"
+          sender: "You"
         };
  
         const newMessages = [...messages, newMessage];
@@ -48,10 +50,12 @@ function MainBox({ lyrics, selectedText }){
       
         await processMessageToChatGPT(newMessages);
       };
+      
+
     const handleSelectedTextSubmission = async (selectedText) => {
         const newMessage = {
           message: selectedText,
-          sender: "user"
+          sender: "You"
         };
  
         const newMessages = [...messages, newMessage];
@@ -65,7 +69,7 @@ function MainBox({ lyrics, selectedText }){
         event.preventDefault()
         const newMessage = {
             message: input,
-            sender: "user"
+            sender: "You"
         }
 
         const newMessages = [...messages,newMessage];
@@ -116,27 +120,44 @@ function MainBox({ lyrics, selectedText }){
         }).then((response)=>{
             return response.json();
         }).then((data)=>{
-            console.log(data.choices[0].message.content);
-            setMessages(
-                [
-                    ...chatMessages,
-                    {
-                        message: data.choices[0].message.content,
-                        sender: "ChatGPT"
-                    }
-                ]
-            )
-        })
+            const updatedMessages = [
+                ...chatMessages,
+                {
+                    message: data.choices[0].message.content,
+                    sender: "LyricsInterpreterGPT"
+                }
+            ];
+            setMessages(updatedMessages);
+    
+            // Add your code here
+           
+            const content = updatedMessages.map((msg, index) => {
+              const paddedSender = msg.sender.padEnd(10, ' ');
+              const paddedMessage = msg.message.padEnd(50, ' ');
+              const formattedMessage = `${paddedSender}: ${paddedMessage}`;
+          
+              // Construct React element directly here
+              return {
+                  type: 'div',
+                  props: {
+                      className: msg.sender === "LyricsInterpreterGPT" ? "gpt-message" : "user-message",
+                      children: formattedMessage
+                  }
+              };
+          });
+          
+          setMainBoxContent(content);    
+          })
     }
 
     return (
-        <div className="container1 border-rounded mb-10 py-1 text-center ">
+        <div className="border-rounded mb-10 py-1 text-center ">
         _____________________________________________________________________________________________________________________________________________________________________________________________________
           <div className="response-area border-rounded py-5 ">
           {messages.map((message, index) => {
     return(
-        <div key={index} className={`${message.sender==="ChatGPT" ? 'gpt-message' : 'user-message'} message ${clearingMessages ? 'message-exit' : ''}`}>
-        <div className="sender">{message.sender==="ChatGPT" ? "LyricsInterpreterGPT" : "You"}</div>
+        <div key={index} className={`${message.sender==="LyricsInterpreterGPT" ? 'gpt-message' : 'user-message'} message ${clearingMessages ? 'message-exit' : ''}`}>
+        <div className="sender">{message.sender==="LyricsInterpreterGPT" ? "LyricsInterpreterGPT" : "You"}</div>
         <div className="message-content">{message.message}</div>
         </div>             
     );
