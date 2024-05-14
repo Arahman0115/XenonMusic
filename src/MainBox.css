@@ -1,0 +1,99 @@
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f4f4f8;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Area where messages are displayed */
+.response-area {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 20px;
+    overflow-y: auto; /* Allows scrolling */
+    max-height: 400px; /* Limits maximum height */
+    border-radius: 8px;
+}
+
+/* Styling for individual messages */
+.message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+
+/* Differentiates messages from the user and GPT */
+.gpt-message {
+    background-color: #d1eefc;
+    text-align: left;
+    border-left: 3px solid #2196f3;
+}
+
+.user-message {
+    background-color: #e8f5e9;
+    text-align: right;
+    border-right: 3px solid #4caf50;
+}
+
+/* Sender's name styling */
+.sender {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Message content styling */
+.message-content {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Input area styling */
+.prompt-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input-wrapper {
+    width: 100%;
+}
+
+.textareachat {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: none; /* Disables resizing of the textarea */
+}
+
+/* Styling for buttons */
+button {
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: black }
+  }
+  
+  .typing {
+    display: inline-block;
+    overflow: hidden; /* Ensures the content is clipped */
+    border-right: .15em solid black; /* The caret */
+    white-space: nowrap; /* Keeps the content on a single line */
+    width: 0; /* Start with 0 width and expand */
+    animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+  }

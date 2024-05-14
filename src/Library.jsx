@@ -5,6 +5,7 @@ import MainBox from './Mainbox';
 import MainBoxContentDisplay from './MainBoxContentDisplay';
 import arrowright from './assets/arrow-right.png';
 import arrowdown from './assets/arrow-down.png';
+import './LibraryStyles.css'; // Ensure you have this CSS file
 
 const Library = ({ onLibraryPage }) => {
   const [libraryDict, setLibraryDict] = useState({});
@@ -74,26 +75,17 @@ const Library = ({ onLibraryPage }) => {
                 </div>
               </h3>
               {expanded[videoId] && (
-                <div className="entry-content mr-20 w-200">
-                  <div className='mr-1 ml-10 w-300'>
-                    <LyricsDisplay lyrics={lyrics} videoId={videoId} onLibraryPage={true} />
+                <div className="entry-content">
+                <LyricsDisplay lyrics={lyrics} videoId={videoId} />
+                <VideoPlayer videoId={videoId} />
+                <div className="chat-history">
+                  <p className='chathistorytext text-3xl text-center font-bold mb-5 mt-5 underline underline-offset-7'>Chat History</p>
+                  <div className='overflow-auto h-[500px] mb-10 px-5'> 
+                  <MainBoxContentDisplay content={mainBoxContent} />
                   </div>
-                  <div className="vidplayerdiv  ml-5 mr-15 d-flex justify-center align-center ml-40 mb-10 px-55 mr-5">
-                    <VideoPlayer className='video-player ml-1 mb-10 flex flex-col' videoId={videoId} />
-                  </div>
-              <div className='w-200'> 
-              <p className='chathistorytext text-3xl text-center font-bold mb-5 underline underline-offset-7'>
-              Chat History 
-              </p>
-              <p className='border rounded-md mb-10 text-center font-bold text-justify'>
-   
-              <div className='ml-5 mr-5 mt-5 overflow-auto h-[400px]'>
-              <MainBoxContentDisplay content={mainBoxContent} />
-
-              </div>
-              </p>              
-              </div>
+                  
                 </div>
+              </div>
               )}
             </div>
             {!expanded[videoId] ? renderRemoveButton(videoId) : null}        

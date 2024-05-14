@@ -111,10 +111,10 @@ function App() {
           </div>
             <div id="three-container" className="w-1/2 mr-2" />
             <div className="flex">
-              <div className="w-1/2 mr-2">
+              <div className="appvideoplayer w-1/2 mr-2">
                 <VideoPlayer videoId={videoId} />
               </div>
-              <div className="w-1/2 ml-2 flex flex-row ">
+              <div className="applyricsdisplay w-1/2 ml-2 flex flex-row ">
                 <LyricsDisplay  lyrics={lyrics} videoId={videoId} songName={songName} artistName={artistName} mainBoxContent={mainBoxContent} addToLibrary={addToLibrary} />
                 <div>
                 <button className="librarybutton px-15 py-23 ml-5 mt-60" onClick={handleMouseUp}>

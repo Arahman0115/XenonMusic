@@ -50,7 +50,7 @@ a:hover {
 }
 
 body {
-  margin: 0;
+  
   min-width: 320px;
   min-height: 100vh;
   animation: changeBackground 30s infinite; 
@@ -76,6 +76,16 @@ h2 {
   margin-top: 1rem;
   margin-bottom: 5rem; /* Add margin to push the heading down */
 }
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 h1 {
   font-family: 'Briem', 'Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif';
   font-size: 3.2em;
@@ -83,15 +93,18 @@ h1 {
   margin-top: 2rem;
   margin-bottom: 5rem; /* Add margin to push the heading down */
   text-align: center;
+  animation: slideIn 0.5s ease-in-out;
 }
 .xenon-text {
   font-size: 8rem;
   color: #ddcdcd; /* Red color */
   text-align: start;
   margin-top: 2rem; /* Adjust margin-top as needed */
-  margin-left: 5rem; /* Adjust margin-left as needed */
+  margin-left: 15rem; /* Adjust margin-left as needed */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow effect */
   z-index: 9999;
+  animation: slideIn 0.5s ease-in-out;
+  
 
 }
 
@@ -219,6 +232,26 @@ input {
   margin: 0 auto;
 }
 /* MainBoxcss */
+@keyframes slideInXLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slideInXRight {
+  from {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 .gpt-message {
   background-color: #22a5b3;
   color: #ffffff;
@@ -226,12 +259,15 @@ input {
   margin-bottom: 10px;
   padding: 10px 20px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  animation: slideInXLeft .5s ease-in-out;
 }
 
 .gpt-message .message-content {
   background-color: #22a5b3;
   color: #ffffff;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  animation: slideInX .5s ease-in-out;
+
 }
 
 
@@ -243,6 +279,7 @@ input {
   margin-bottom: 10px;
   padding: 10px 20px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  animation: slideInXRight .5s ease-in-out;
 }
 .user-message .message-content {
   background-color: #199997;
@@ -405,6 +442,25 @@ input {
   color:#ffffff;
   border-color: #ffffff;
 }
+@keyframes scaleUp {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.appvideoplayer {
+  animation: scaleUp 0.5s ease-in-out;
+}
+.applyricsdisplay {
+  animation: scaleUp 0.5s ease-in-out;
+}
+.songcont {
+  animation: scaleUp 0.5s ease-in-out;
+}
 
 .vidplayerdiv {
   display: flex;
@@ -413,10 +469,13 @@ input {
   margin-top: 20px;
   width:80%;
   margin-left: 50px;
+  animation: scaleUp 0.5s ease-in-out;
 }
 .video-player {
   width: 500px;
   height:400px;
+  animation: scaleUp 0.5s ease-in-out;
+
 }
 ::-webkit-scrollbar {
   width: 10px;
@@ -439,4 +498,23 @@ input {
 }
 .chathistorytext {
   font-family: Briem, 'Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif';
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: black }
+}
+
+.typing {
+  display: inline-block;
+  overflow: hidden;
+  border-right: .15em solid black; /* The caret */
+  white-space: nowrap; /* Keeps the content on a single line */
+  animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+  max-width: 100%;
 }
