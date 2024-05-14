@@ -6,7 +6,7 @@ const About = () => {
       <div className='aboutcont border-black-500 bg-red-500 text-white  p-3 rounded-2xl'>
         <p>Welcome to our music platform! We're delighted to have you here. 
 
-Our website is designed to enhance your music listening experience by providing you with a unique feature - synchronized lyrics. Now, you can not only listen to your favorite songs but also sing along with the lyrics displayed in real-time.
+Our website is designed to enhance your music listening experience by providing you with a platform to study lyrics. Now, you can not only listen to your favorite songs but also sing along with the lyrics displayed in real-time.
 
 Whether you're a casual listener or a passionate music enthusiast, we believe our platform will bring a new dimension to your music experience. Enjoy exploring new songs, revisiting old classics, and expanding your musical horizons.
 
