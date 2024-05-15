@@ -33,6 +33,8 @@ function App() {
     const storedLibrary = localStorage.getItem('library6');
     return storedLibrary ? JSON.parse(storedLibrary) : {};
   });
+  document.body.className = 'theme-dark'
+
   
   useEffect(() => {
     fetchDefaultLyrics();
@@ -69,8 +71,26 @@ function App() {
     const text = window.getSelection().toString();
     setSelectedText(text);
 }
+useEffect(() => {
+  const handleThemeChange = (event) => {
+    document.body.className = event.target.value;
+    console.log('Theme Changed to:', event.target.value);
+  };
 
+  const themeSelector = document.getElementById('themeSelector');
+  
+  if (themeSelector) {
+    themeSelector.addEventListener('change', handleThemeChange);
+  } else {
+    console.log('themeSelector not found');
+  }
 
+  return () => {
+    if (themeSelector) {
+      themeSelector.removeEventListener('change', handleThemeChange);
+    }
+  };
+}, []); 
   useEffect(() => {
     localStorage.setItem('library6', JSON.stringify(libraryDict));
   }, [libraryDict]);
@@ -98,15 +118,20 @@ function App() {
       </div>
         <div> 
         <Navbar />
+
         </div>
         </div>
         <div>
           <h1 id='xenon-text' className="text-8xl font-bold text-white-500 mb-5">Xenon</h1>
-          
+     
         </div>
         <Switch>
           <Route exact path="/">
           <div>          
+          <select id="themeSelector" className='bg-black-500'>
+        <option value="theme-dark">Default</option>
+        <option value="theme-spotify">Spotify</option>
+      </select>
           </div>
             <div id="three-container" className="w-1/2 mr-2" />
             <div className="flex">
