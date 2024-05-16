@@ -32,11 +32,16 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission }) {
         return;
       }
       console.log('song', song);
+      
 
-      const lyricsRes = await axios.get(`https://api.lyrics.ovh/v1/${artist}/${song}`);
-  
+      const lyricsRes = await axios.get('http://localhost:3000/lyrics', {
+        params: {
+          artist: artistInputRef.current.value,
+          song: songInputRef.current.value,
+        },
+      });
       // Access the `lyrics` property directly
-      const lyrics = lyricsRes.data ? lyricsRes.data.lyrics : 'Lyrics not found';
+      const lyrics = lyricsRes.data.message.body.lyrics ? lyricsRes.data.message.body.lyrics.lyrics_body : 'Lyrics not found';
       onLyricsSubmission(lyrics);
       var button = document.getElementById('explosion-button');
       button.classList.add('explosion');
