@@ -1,12 +1,16 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import MainBox from './Mainbox';
 import axios from 'axios';
 import './index.css'
+import qs from 'qs';
+
 
 function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission }) {
   const [artist, setArtist] = useState('');
   const [song, setSong] = useState('');
+
   const youtubeApiKey = import.meta.env.VITE_KEY;
+  const yourSpotifyToken = import.meta.env.VITE_SPOTIFY_TOKEN;
 
   const songInputRef = useRef(null);
   const artistInputRef = useRef(null);
@@ -49,6 +53,18 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission }) {
       setTimeout(function() {
         button.classList.remove('explosion');
       }, 500);
+      const response = await axios.get('https://api.spotify.com/v1/search', {
+      params: {
+        q: `${artist} ${song}`,
+        type: 'track',
+      },
+      headers: {
+        Authorization: `Bearer ${yourSpotifyToken}`,
+      },
+    });
+
+    const trackUri = response.data.tracks.items[3].uri.replace('spotify:track:', '');
+    console.log('hello', trackUri);
   
       // Fetch video information directly from YouTube API
       const youtubeRes = await axios.get('https://www.googleapis.com/youtube/v3/search', {
@@ -65,7 +81,7 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission }) {
       const videoId = youtubeItems.length ? youtubeItems[0].id.videoId : '';
   
       // Pass the fetched data to the parent component's state
-      onSearchResults({ artist, song, lyrics, videoId});
+      onSearchResults({ artist, song, lyrics, videoId, trackUri});
  
     } catch (error) {
       console.error('Error fetching data:', error);

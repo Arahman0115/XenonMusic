@@ -14,8 +14,8 @@ const LoginPage = () => {
   };
 
   const authenticateUser = (username, password) => {
-    const fakeUsername = 'admin';
-    const fakePassword = 'password';
+    const fakeUsername = '';
+    const fakePassword = '';
     return username === fakeUsername && password === fakePassword;
   };
 

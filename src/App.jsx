@@ -22,6 +22,7 @@ import MainBox from './Mainbox';
 function App() {
   const defaultArtist = 'Rick Astley';
   const defaultSong = 'Never Gonna Give You Up';
+  const defaultUri = '4PTG3Z6ehGkBFwjybzWkR8';
   const defaultVideoId = 'dQw4w9WgXcQ';
   const [artistName, setArtistName] = useState(defaultArtist);
   const [songName, setSongName] = useState(defaultSong);
@@ -31,6 +32,7 @@ function App() {
   const[selectedText, setSelectedText] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false); 
+  const [trackUri, settrackUri] = useState(defaultUri);
   const [libraryDict, setLibraryDict] = useState(() => {
     //const storedLibrary = localStorage.getItem('library2');
     const storedLibrary = localStorage.getItem('library6');
@@ -38,7 +40,6 @@ function App() {
   });
   document.body.className = 'theme-default'
 
-  
   useEffect(() => {
     fetchDefaultLyrics();
   }, []);
@@ -50,12 +51,14 @@ function App() {
  //   setLyrics(lyrics);
  // };
 
- const handleSearchResults = ({ artist, song, lyrics, videoId }) => {
+ const handleSearchResults = ({ artist, song, lyrics, videoId, trackUri }) => {
   console.log('handleSearchResults:', artist, song, videoId)
   setArtistName(artist);
   setMainBoxContent(mainBoxContent);
   setSongName(song);
   setVideoId(videoId);
+  settrackUri(trackUri);
+  console.log('trackUri:', trackUri);
 };
   const handleLyricsSubmission = (lyrics) => {
     setLyrics(lyrics);
@@ -146,9 +149,9 @@ useEffect(() => {
             <div id="three-container" className="w-1/2 mr-2" />
             <div className="flex">
               <div className="appvideoplayer w-1/2 mr-2">
-                <VideoPlayer videoId={videoId} />
+                <VideoPlayer videoId={videoId} track = {trackUri} />
               </div>
-              <div className="applyricsdisplay w-1/2 ml-2 flex flex-row ">
+              <div className="applyricsdisplay w-1/2 ml-10 flex flex-row ">
                 <LyricsDisplay lyrics={lyrics} videoId={videoId} songName={songName} artistName={artistName} mainBoxContent={mainBoxContent} addToLibrary={addToLibrary} />
                 <div>
                   <button className="librarybutton px-15 py-23 ml-5 mt-60" onClick={handleMouseUp}>
