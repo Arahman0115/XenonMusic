@@ -134,7 +134,11 @@ useEffect(() => {
 
           <Route exact path="/">
           <div>
-              <Navbar />
+          <div>
+          <Navbar />
+
+
+          </div>
             </div>
             <div>          
             
