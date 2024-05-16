@@ -27,13 +27,11 @@
 
 /* Differentiates messages from the user and GPT */
 .gpt-message {
-    background-color: #d1eefc;
     text-align: left;
     border-left: 3px solid #2196f3;
 }
 
 .user-message {
-    background-color: #e8f5e9;
     text-align: right;
     border-right: 3px solid #4caf50;
 }
@@ -45,10 +43,7 @@
 }
 
 /* Message content styling */
-.message-content {
-    font-size: 1rem;
-    line-height: 1.5;
-}
+
 
 /* Input area styling */
 .prompt-area {

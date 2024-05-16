@@ -1,0 +1,98 @@
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 80%;
+    margin-left: 200px;
+    background: #230000; /* Dark background for contrast */
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 0 20px #8a0404; /* Subtle outer glow */
+    overflow: hidden; /* Ensures no shadows spill outside the border */
+  }
+  
+  /* Pseudo-elements for edge lights */
+  .login-container::before, .login-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-radius: 10px;
+    box-shadow: inset 0 0 15px #ff4500; /* Inner glow */
+    animation: glow2 2s infinite ease-in-out;
+  }
+  
+  /* Keyframes for glowing animation */
+  @keyframes glow2 {
+    0%, 100% {
+      box-shadow: inset 0 0 10px #ff4500, 0 0 20px #ff4500; /* Subtle glow */
+    }
+    50% {
+      box-shadow: inset 0 0 20px #ff6347, 0 0 40px #ff6347; /* Brighter glow */
+    }
+  }
+  
+  form {
+    padding: 20px;
+    background: #340000;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+  }
+  
+  .usernameinput,
+  .passwordinput {
+    width: 80%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 2px solid #5c0303; /* Stylish border color */
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+}
+  
+  input::placeholder {
+    color: #000000;
+  }
+  
+  .submitbutton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    width: 85%;
+    background-color: #5c0303;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: solid 18px;
+    transition: background-color 0.3s, transform 0.3s;
+    font-family: var(--font-family)
+  }
+  
+  button:hover, button:focus {
+    background-color: #8a0404;
+    transform: scale(1.05);
+    color:#000000
+  }
+  
+  /* Animation keyframes for input focus */
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 5px #8a0404;
+    }
+    50% {
+      box-shadow: 0 0 20px #8a0404;
+    }
+  }
+  
+  input:focus {
+    animation: glow 1.5s infinite alternate;
+  }

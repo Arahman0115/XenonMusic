@@ -16,32 +16,40 @@
   --about-content-bg: #181818; /* Slightly Lighter Dark Background */
   --about-content-bg-text: #ffffff; /* White */
   --song-cont-bg: #181818; /* Slightly Lighter Dark Background */
-  --gpt-message-background-color: #181818; /* Slightly Lighter Dark Background */
+  --gpt-message-background-color: #181818;
+  --user-message-background-color: #181818; /* Slightly Lighter Dark Background */
   --about-container-bg: #181818; /* Slightly Lighter Dark Background */
   --fun-fact-bg: #181818; /* Slightly Lighter Dark Background */
   --font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
   --select-color: #ffffff; /* White */
+  --page-background-color:  #1b1919;
+  --font-family: 'Briem', 'Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif';
+  
 }
 /* Dark theme */
-.theme-dark {
+.theme-default {
   --header-bg: #000000;
   --select-bg: #000000;
-  --h1-bg-color: #000000;
-  --header-color: #000000;
+  --h1-bg-color: #510000;
+  --header-color: #5f0000;
   --bg-color: #5c0303;
-  --h2-color: #000000;
+  --h2-color: #5f0101;
   --p-color: #ffffff;
   --button-hover: #3a3737;
   --buton-hover-border: #b10a0a;
   --input-bg: #000000;
   --button-bg: #000000;
   --button-color: #ffffff;
-  --animation: changeBackgroundRed 10s infinite;
+  --bg-color: linear-gradient(180deg, #000000 0%, #330101 100%);
   --about-content-bg: #5c0303;
   --about-content-bg-text: #000000;
   --song-cont-bg: #000000;
   --gpt-message-background-color: #000000;
   --select-color: #ffffff;
+  --user-message-background-color: #000000;
+  --user-message-text-color: #ffffff;
+  --page-background-color:  #000000;
+  --animation-red-blue: changeBackgroundRed 10s infinite;
 
   --about-container-bg: #000000;
   --fun-fact-bg: #000000;
@@ -49,7 +57,7 @@
 }
 
 /* Light theme */
-.theme-default {
+.theme-none {
   --header-bg: #5e81ac; /* Glacier Blue */
   --header-color: #eceff4; /* Snow Storm */
   --bg-color: #e5e9f0; /* Whisper */
@@ -76,7 +84,7 @@ header {
 }
 
 body {
-  animation: var(--animation);
+  background: var(--bg-color);
 }
 h1 {
   color: var(--h1-bg-color);
@@ -93,6 +101,7 @@ p {
 
 input {
   background-color: var(--input-bg);
+  font-family: var(--font-family);
 }
 
 button {
@@ -143,8 +152,8 @@ select {
 #themeSelector {
   position: absolute;
   top: 0;
-  margin-top: 15px;
-  margin-left: 10px;
+  margin-left: 80px;
+  margin-top: 10px;
   left: 0;
   padding: 10px;
   cursor: pointer;
@@ -193,13 +202,13 @@ a:hover {
 }
 @keyframes changeBackgroundRed {
   0% {
-    background-color: #861107; /* Start color */
+    background-color: #410702; /* Start color */
   }
   50% {
-    background-color: #720404; /* Middle color */
+    background-color: #3c0000; /* Middle color */
   }
   100% {
-    background-color: #861107; /* End color */
+    background-color: #410702; /* End color */
   }
 }
 body {
@@ -390,6 +399,8 @@ input:focus {
 
 
 .user-message {
+  background-color: var(--user-message-background-color);
+  color: var(--user-message-text-color);
   border-radius: 5px;
   margin-bottom: 10px;
   padding: 10px 20px;
@@ -397,10 +408,19 @@ input:focus {
   animation: slideInXRight .5s ease-in-out;
 }
 .user-message .message-content {
+  background-color: var(--user-message-background-color);
+  color: var(--user-message-text-color);
 
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
-
+.message-content {
+  background-color: var(--user-message-background-color);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.librarycontainer {
+  background-color: var(--bg-color);
+}
 .message {
   width: fit-content;
   max-width: 80%;

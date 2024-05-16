@@ -57,7 +57,7 @@ const Library = ({ onLibraryPage }) => {
   return (
     <div className="max-w-8xl mt-5">
       <div className=' ml-50'>
-        <h2 className="text-4xl font-bold text-white-500 text-center justify-end mb-10">Library</h2>
+        <h2 className="text-4xl font-bold text-center justify-end mb-10">Library</h2>
       </div>
       <div className="text-white h-10 w-350 p-4 rounded-2xl"></div>
   
@@ -80,8 +80,11 @@ const Library = ({ onLibraryPage }) => {
                 <VideoPlayer videoId={videoId} />
                 <div className="chat-history">
                   <p className='chathistorytext text-3xl text-center font-bold mb-5 mt-5 underline underline-offset-7'>Chat History</p>
-                  <div className='overflow-auto h-[500px] mb-10 px-5'> 
+                  <div className='librarycontainer overflow-auto h-[500px] mb-10 px-5 rounded-2xl'> 
+                  <div className='mt-5'> 
                   <MainBoxContentDisplay content={mainBoxContent} />
+                  </div>
+                  
                   </div>
                   
                 </div>

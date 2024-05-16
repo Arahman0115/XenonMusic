@@ -7,12 +7,14 @@ import { MeshBasicMaterial } from 'three';
 
 
 import axios from 'axios';
+import HomePage from './HomePage';
+import LoginPage from './LoginPage';
 import SearchForm from './SearchForm';
 import LyricsDisplay from './LyricsDisplay';
 import VideoPlayer from './VideoPlayer';
 import Navbar from './Navbar';
 import About from './About';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Library from './Library';
 import * as THREE from 'three';
 import MainBox from './Mainbox';
@@ -28,12 +30,13 @@ function App() {
   const [lyrics, setLyrics] = useState('');
   const[selectedText, setSelectedText] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); 
   const [libraryDict, setLibraryDict] = useState(() => {
     //const storedLibrary = localStorage.getItem('library2');
     const storedLibrary = localStorage.getItem('library6');
     return storedLibrary ? JSON.parse(storedLibrary) : {};
   });
-  document.body.className = 'theme-dark'
+  document.body.className = 'theme-default'
 
   
   useEffect(() => {
@@ -105,74 +108,84 @@ useEffect(() => {
           [videoId]: { lyrics, songName, artistName, mainBoxContent }
         };
       }
+      //67918
       // If the song is already in the library, return the previous state
       return prevState;
     });
   };
   return (
     <Router>
+      <h1 id='xenon-text' className="text-8xl font-bold text-white-500 mb-5">Xenon</h1>
+      {!isLoggedIn && <Redirect to="/homepage" />} {/* Redirect to homepage page if not logged in */}
+      <Route path="/homepage">
+        <HomePage setIsLoggedIn={setIsLoggedIn} /> {/* Pass setIsLoggedIn to HomePage */}
+      </Route>
+      <Route path="/login">
+        <LoginPage setIsLoggedIn={setIsLoggedIn} /> {/* Pass setIsLoggedIn to LoginPage */}
+      </Route>
+
       <div className="container mx-auto p-4">
-      <div className='flex flex-row'>
-      <div className='hamburger-container mr-10'>
+        
 
-      </div>
-        <div> 
-        <Navbar />
-
-        </div>
-        </div>
-        <div>
-          <h1 id='xenon-text' className="text-8xl font-bold text-white-500 mb-5">Xenon</h1>
-     
-        </div>
         <Switch>
+
           <Route exact path="/">
-          <div>          
-          <select id="themeSelector" className='bg-black-500'>
-        <option value="theme-dark">Default</option>
-        <option value="theme-spotify">Spotify</option>
-      </select>
+            <div>          
+            <div>
+              <Navbar />
+            </div>
+            <div>
+            <select id="themeSelector" className='bg-black-500'>
+                <option value="theme-default">Default</option>
+                <option value="theme-spotify">Spotify</option>
+              </select>
+            </div> 
           </div>
+          
             <div id="three-container" className="w-1/2 mr-2" />
             <div className="flex">
               <div className="appvideoplayer w-1/2 mr-2">
                 <VideoPlayer videoId={videoId} />
               </div>
               <div className="applyricsdisplay w-1/2 ml-2 flex flex-row ">
-                <LyricsDisplay  lyrics={lyrics} videoId={videoId} songName={songName} artistName={artistName} mainBoxContent={mainBoxContent} addToLibrary={addToLibrary} />
+                <LyricsDisplay lyrics={lyrics} videoId={videoId} songName={songName} artistName={artistName} mainBoxContent={mainBoxContent} addToLibrary={addToLibrary} />
                 <div>
-                <button className="librarybutton px-15 py-23 ml-5 mt-60" onClick={handleMouseUp}>
-        Analyze
-      </button>
-                </div>
-              </div>
-              
+                  <button className="librarybutton px-15 py-23 ml-5 mt-60" onClick={handleMouseUp}>
+                  Analyze
+  </button>
             </div>
-           
-            
-            <SearchForm chatHistory={chatHistory} onSearchResults={handleSearchResults} onLyricsSubmission={handleLyricsSubmission} />            <div>
-            <div className='overflow-auto h-[600px]'> 
-            <MainBox setMainBoxContent={setMainBoxContent} onChatHistoryChange={setChatHistory} selectedText={selectedText} lyrics={songName === defaultSong ? '' : lyrics}
-             />   
-
-            </div>
-                    
-             </div>
-            
-          </Route>
-          <Route path="/about">
-          <div className='mt-10'>
-          <About />
-
           </div>
-          </Route>
-          <Route path="/library">
-            <Library libraryDict={libraryDict} />
-          </Route>
-          {/* Add more routes as needed */}
-        </Switch>
+          
+        </div>
+       
         
+        <SearchForm chatHistory={chatHistory} onSearchResults={handleSearchResults} onLyricsSubmission={handleLyricsSubmission} />            <div>
+        <div className='overflow-auto h-[600px]'> 
+        <MainBox setMainBoxContent={setMainBoxContent} onChatHistoryChange={setChatHistory} selectedText={selectedText} lyrics={songName === defaultSong ? '' : lyrics}
+         />   
+
+        </div>
+                
+         </div>
+        
+      </Route>
+      <Route path="/about">
+      <div className='mt-10'>
+      <Navbar />
+
+      <About />
+
       </div>
+      </Route>
+      <Route path="/library">
+      <Navbar />
+
+        <Library libraryDict={libraryDict} />
+      </Route>
+      {/* Add more routes as needed */}
+    </Switch>
+    
+  </div>
     </Router>
   );
 }

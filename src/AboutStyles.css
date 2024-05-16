@@ -8,7 +8,10 @@
     padding-bottom: 40px;
   }
 
-  
+  .welcometxt {
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
   .about-content {
  
     padding: 40px;
