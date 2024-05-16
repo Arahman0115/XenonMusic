@@ -130,10 +130,11 @@ useEffect(() => {
         <Switch>
 
           <Route exact path="/">
-            <div>          
-            <div>
+          <div>
               <Navbar />
             </div>
+            <div>          
+            
             <div>
             <select id="themeSelector" className='bg-black-500'>
                 <option value="theme-default">Default</option>
