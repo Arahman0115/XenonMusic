@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 
 
 .theme-spotify {
@@ -33,6 +37,8 @@
   --h1-bg-color: #510000;
   --header-color: #5f0000;
   --bg-color: #5c0303;
+  --lyrics-container-gradient: linear-gradient(180deg, #3f0404 0%, #2a0101 100%);
+  --lyrics-text-gradient: linear-gradient(180deg, #8b0606 0%, #1a0101 100%);
   --h2-color: #5f0101;
   --p-color: #ffffff;
   --button-hover: #3a3737;
@@ -44,13 +50,13 @@
   --about-content-bg: #5c0303;
   --about-content-bg-text: #000000;
   --song-cont-bg: #000000;
-  --gpt-message-background-color: #000000;
+  --gpt-message-background-color: #270101;
   --select-color: #ffffff;
-  --user-message-background-color: #000000;
+  --user-message-background-color: #270101;
   --user-message-text-color: #ffffff;
   --page-background-color:  #000000;
   --animation-red-blue: changeBackgroundRed 10s infinite;
-
+  --selection-box-color: #3f0202;
   --about-container-bg: #000000;
   --fun-fact-bg: #000000;
   --font-family: Briem, 'Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif';
@@ -135,11 +141,14 @@ select {
 .gpt-message {
   background-color: var(--gpt-message-background-color);
 }
-
+.selection-box{
+  background-color: var(--page-background-color);
+}
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  --lyrics-container-gradient: linear-gradient(180deg, #8b0606 0%, #560303 100%);
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -149,6 +158,11 @@ select {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.lyrics-display {
+  background-color: var(--lyrics-container-gradient);
+
+}
+
 #themeSelector {
   position: absolute;
   top: 0;
@@ -159,7 +173,35 @@ select {
   cursor: pointer;
   border-radius: 10px;
 }
+.track-item {
+  padding: 15px;
+  margin-bottom: 12px;
+  border: 2px solid #510000;
+  border-radius: 12px;
+  background-color: #fff5f5; /* Light background for contrast */
+  color: #510000; /* Main text color */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(81, 0, 0, 0.5); /* Subtle shadow */
+}
 
+.track-item:hover {
+  background-color: #f8eaea; /* Slightly darker background on hover */
+  color: #fff;
+  border-color: #fff;
+  box-shadow: 0 0 20px rgba(81, 0, 0, 0.7); /* Enhanced glow effect */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.track-name {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.track-artist {
+  font-style: italic;
+  color: #7a2e2e; /* Slightly different shade for artist name */
+}
 a {
   font-weight: 500;
   color: #646cff;
@@ -319,13 +361,14 @@ input:focus {
   outline: none;
   position: relative;
   overflow: hidden;
+  background-color: var(--h1-bg-color);
   transition: background-color 0.3s;
 }
 #clear-button {
   padding: 3px 15px;
   font-size: 18px;
   margin-left: 5px;
-  /*background-color: #22b3b1;*/
+  background-color: var(--h1-bg-color);
   border-radius: 5px;
   cursor: pointer;
   outline: none;
@@ -344,6 +387,8 @@ input:focus {
   0% { transform: scale(1); opacity: 1; }
   100% { transform: scale(2); opacity: 0; }
 }
+/* Styles for LyricsDisplay component */
+
 
 /* Explosion effect for the button */
 .explosion {
@@ -356,8 +401,11 @@ input:focus {
 
 
 }
+.clear {
+  background-color: var(--selection-box-color);
+}
 .container {
-  width: 80%;
+  width: 300%;
   height: 50px;
   margin: 0 auto;
 }
@@ -382,16 +430,17 @@ input:focus {
     opacity: 1;
   }
 }
+
 .gpt-message {
   border-radius: 5px;
   margin-bottom: 10px;
   padding: 10px 20px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: 'Montserrat', sans-serif;
   animation: slideInXLeft .5s ease-in-out;
 }
 
 .gpt-message .message-content {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: 'Montserrat', sans-serif;
   animation: slideInX .5s ease-in-out;
 
 }
@@ -404,14 +453,13 @@ input:focus {
   border-radius: 5px;
   margin-bottom: 10px;
   padding: 10px 20px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: 'Montserrat', sans-serif;
   animation: slideInXRight .5s ease-in-out;
 }
 .user-message .message-content {
   background-color: var(--user-message-background-color);
-  color: var(--user-message-text-color);
 
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: 'Montserrat', sans-serif;
 }
 .message-content {
   background-color: var(--user-message-background-color);
@@ -434,6 +482,9 @@ input:focus {
   width: 80%;  
  
 }
+.prompt-area ::placeholder{
+  background-color: var(--selection-box-color);
+}
 .prompt-area textarea {
   resize: vertical;
   min-height: 10px;
@@ -443,6 +494,7 @@ input:focus {
   border-radius: 5px;
   padding-right: 60px;
   text-align: left;
+  background-color: var(--selection-box-color);
 }
 .text-area {
   width: 80%;
@@ -453,11 +505,11 @@ input:focus {
   color: red;
 }
 .textareachat {
-  background-color: #000000;
+  background-color: #2d0101;
   color:#ddcdcd;
 }
 .textareachat::placeholder {
-  background-color: #000000;
+  background-color: var(--selection-box-color);
   color:#ddcdcd;
 }
 .artistinput::placeholder {
@@ -480,7 +532,13 @@ input:focus {
   color: #ffffff;
 }
 .submit:hover {
-  background-color: #1e9795;
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translatey(-50%) translateX(-150%);
+  background-color: #bcb2b2;  
+  margin-bottom: 10px;
+  border: none;
 }
 .submit img{
   width:20px;
@@ -488,7 +546,7 @@ input:focus {
 }
 .submit img:hover {
   cursor: pointer;
-  background-color: #1e9795;
+  background-color: #a3abab;
 }
 @keyframes popOut {
   0% {

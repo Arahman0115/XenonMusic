@@ -1,0 +1,39 @@
+.lyrics-display {
+    background: var(--lyrics-container-gradient);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+  }
+  
+  .lyrics-container {
+    background: var(--h1-bg-color);
+    color: #f2f2f2;
+    padding: 20px 20px;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .highlight-button,
+  .library-button {
+    background: var(--h1-bg-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .highlight-button:hover,
+  .library-button:hover {
+    background: var(--button-hover-border);
+    color:#f2f2f2;
+    border: 1px solid var(--button-hover-border);
+  }
+  
+  .highlight-button:focus,
+  .library-button:focus {
+    outline: none;
+  }

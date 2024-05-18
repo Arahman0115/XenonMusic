@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "predev": "node getSpotifyToken.js",
+    "server": "nodemon musixmatchproxy.js",
+    "dev": "concurrently \"npm:server\" \"vite\"",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -19,6 +21,9 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "lrc-parser": "^1.0.1",
+    "nodemon": "^3.1.0",
+    "python-shell": "^5.0.0",
     "qs": "^6.12.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
@@ -32,6 +37,7 @@
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",

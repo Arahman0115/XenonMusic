@@ -1,7 +1,15 @@
-//LyricsDisplay.jsx
 import React, { useState } from 'react';
+import './LyricsDisplay.css';
 
-function LyricsDisplay({ lyrics, videoId, songName, artistName, mainBoxContent, addToLibrary, onLibraryPage, handleAnalyzeClickProp }) {
+function LyricsDisplay({ lyrics, 
+  videoId, 
+  songName, 
+  artistName, 
+  trackUri, 
+  mainBoxContent, 
+  addToLibrary, 
+  onLibraryPage, 
+  handleAnalyzeClickProp }) {
   const [selectedText, setSelectedText] = useState('');
 
   // Function to handle highlighting the selected text
@@ -10,14 +18,15 @@ function LyricsDisplay({ lyrics, videoId, songName, artistName, mainBoxContent, 
     if (highlightedText) {
       highlightedText.innerHTML = highlightedText.innerHTML.replace(
         selectedText,
-        `<span style="background-color: red;">${selectedText}</span>`
+        `<span style="background-color: yellow; font-weight: bold;">${selectedText}</span>`
       );
     }
   };
+
   const handleAnalyzeClick = () => {
     handleAnalyzeClickProp(selectedText);
   };
-  
+
   // Function to handle text selection
   const handleTextSelection = () => {
     const selection = window.getSelection();
@@ -31,18 +40,18 @@ function LyricsDisplay({ lyrics, videoId, songName, artistName, mainBoxContent, 
 
   // Handle adding to the library using the provided prop function
   const handleAddToLibraryClick = () => {
-    addToLibrary(videoId, lyrics, songName, artistName, mainBoxContent);
-    console.log('Calling addToLibrary with:', { videoId, lyrics, songName, artistName, mainBoxContent});
+    addToLibrary(videoId, lyrics, songName, artistName, trackUri, mainBoxContent);
+    console.log('Calling addToLibrary with:', { videoId, lyrics, songName, artistName, trackUri, mainBoxContent });
   };
+
   const renderButtons = !onLibraryPage && (
-    <div className="flex ml-60 justify mt-5">
-      <button className="highlightbutton px-5 py-2" onClick={handleHighlight}>
+    <div className="flex justify-center mt-5">
+      <button className="highlight-button px-5 py-2 mx-2" onClick={handleHighlight}>
         Highlight
       </button>
-      <button className="librarybutton px-5 py-2 ml-5" onClick={handleAddToLibraryClick}>
+      <button className="library-button px-5 py-2 mx-2" onClick={handleAddToLibraryClick}>
         Add to your Library
       </button>
-      
     </div>
   );
 
@@ -51,16 +60,14 @@ function LyricsDisplay({ lyrics, videoId, songName, artistName, mainBoxContent, 
     return null; // Return null if lyrics are not available
   }
 
+
   return (
-    <div className="text-center justify-end flex flex-col px-5 ml-5">
-      <h2 className="text-3xl font-bold text-black-500">Lyrics</h2>
-      <div className="mx-auto max-w-xl overflow-y-auto max-h-80 mt-[-50px]" onMouseUp={handleTextSelection}>
+    <div className="lyrics-display text-center flex flex-col px-5 py-5 mx-5 rounded-lg shadow-lg text-white" >
+      <h2 className="text-4xl font-bold mb-5">Lyrics</h2>
+      <div className="lyrics-container mx-auto max-w-xl overflow-y-auto max-h-80 p-4 bg-white text-black rounded-lg shadow-inner" onMouseUp={handleTextSelection}>
         <pre id="lyrics-text" className="whitespace-pre-line">{lyrics}</pre>
       </div>
-      {/* Highlight and Add to your Library buttons */}
-      <div className="flex-start ml-25 mt-5">
       {renderButtons}
-      </div>
     </div>
   );
 }

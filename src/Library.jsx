@@ -15,12 +15,12 @@ const Library = ({ onLibraryPage }) => {
     setExpanded(prev => ({ ...prev, [videoId]: !prev[videoId] }));
   };
   const removeEntry = (videoId) => {
-    const storedLibrary = localStorage.getItem('library6');
+    const storedLibrary = localStorage.getItem('library7');
     if (storedLibrary) {
       try {
         const parsedLibrary = JSON.parse(storedLibrary);
         delete parsedLibrary[videoId];
-        localStorage.setItem('library6', JSON.stringify(parsedLibrary));
+        localStorage.setItem('library7', JSON.stringify(parsedLibrary));
         setLibraryDict(parsedLibrary);
       } catch (error) {
         console.error('Error parsing library from localStorage:', error);
@@ -38,7 +38,7 @@ const Library = ({ onLibraryPage }) => {
 
   useEffect(() => {
     // Retrieve libraryDict from localStorage on component mount
-    const storedLibrary = localStorage.getItem('library6');
+    const storedLibrary = localStorage.getItem('library7');
 
     if (storedLibrary) {
       try {
@@ -65,7 +65,7 @@ const Library = ({ onLibraryPage }) => {
         <p className='text-2xl font-bold text-white-500 text-center'>Start Adding Music to the Library!</p>
       ) : (
 
-        libraryEntries.map(([videoId, { lyrics, songName, artistName, mainBoxContent }]) => (
+        libraryEntries.map(([videoId, { lyrics, songName, artistName, mainBoxContent, trackUri }]) => (
           <div key={videoId} className="songcont flex mt-1 w-50 bg-yellow-500 border-rounded">
             <div className='songcont2 mr-5 ml-10 border-rounded ' >
               <h3 className=' mr-15 songname border-rounded' onClick={() => toggleExpand(videoId)}>
@@ -76,8 +76,8 @@ const Library = ({ onLibraryPage }) => {
               </h3>
               {expanded[videoId] && (
                 <div className="entry-content">
-                <LyricsDisplay lyrics={lyrics} onLibraryPage='true' videoId={videoId} />
-                <VideoPlayer videoId={videoId} />
+                <LyricsDisplay lyrics={lyrics} trackUri = {trackUri} onLibraryPage='true' videoId={videoId} />
+                <VideoPlayer videoId={videoId} track={trackUri}/>
                 <div className="chat-history">
                   <p className='chathistorytext text-3xl text-center font-bold mb-5 mt-5 underline underline-offset-7'>Chat History</p>
                   <div className='librarycontainer overflow-auto h-[500px] mb-10 px-5 rounded-2xl'> 
