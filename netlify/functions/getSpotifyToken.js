@@ -4,16 +4,18 @@ import path from 'path';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 
-// Correctly get __filename and __dirname
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Ensure __filename and __dirname are only set once globally
+if (typeof globalThis.__filename === 'undefined' || typeof globalThis.__dirname === 'undefined') {
+  globalThis.__filename = fileURLToPath(import.meta.url);
+  globalThis.__dirname = path.dirname(globalThis.__filename);
+}
 
 // Ensure dotenv config is loaded
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+dotenv.config({ path: path.resolve(globalThis.__dirname, '../../.env') });
 
 function runPythonScript() {
   return new Promise((resolve, reject) => {
-    PythonShell.run(path.join(__dirname, 'spottoken.py'), null, function (err, result) {
+    PythonShell.run(path.join(globalThis.__dirname, 'spottoken.py'), null, function (err, result) {
       if (err) {
         return reject(err);
       }
