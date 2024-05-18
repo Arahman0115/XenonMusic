@@ -5,3 +5,11 @@
 
 [functions]
   node_bundler = "esbuild"
+
+[build.environment]
+  PYTHON_VERSION = "3.8"
+
+[[plugins]]
+  package = "netlify-plugin-python"
+  [plugins.inputs]
+    packages = ["requests", "python-dotenv"]
