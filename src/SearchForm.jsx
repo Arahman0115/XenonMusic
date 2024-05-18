@@ -51,6 +51,7 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission, onTrac
 
     try {
       const token = await fetchSpotifyToken();
+      console.log(token);
 
       // Fetch lyrics from Lyrics.ovh
       const lyricsRes = await axios.get(`https://api.lyrics.ovh/v1/${encodeURIComponent(artist)}/${encodeURIComponent(song)}`);

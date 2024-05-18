@@ -5,10 +5,11 @@ import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-dotenv.config(); // Load environment variables from .env file
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+// Ensure dotenv config is loaded
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 function runPythonScript() {
   return new Promise((resolve, reject) => {
@@ -26,7 +27,7 @@ async function updateEnvFile() {
   try {
     const token = await runPythonScript();
     if (token) {
-      const envFilePath = path.join(__dirname, '../../.env'); // Adjust the path to point to the .env file in the root directory
+      const envFilePath = path.join(__dirname, '../../.env');
       const envContent = fs.readFileSync(envFilePath, 'utf8');
       const newEnvContent = envContent.replace(/VITE_SPOTIFY_TOKEN=.*/, `VITE_SPOTIFY_TOKEN=${token}`);
       fs.writeFileSync(envFilePath, newEnvContent);
