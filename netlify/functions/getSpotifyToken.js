@@ -3,10 +3,10 @@ import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
+// Correctly get __filename and __dirname
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 // Ensure dotenv config is loaded
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
