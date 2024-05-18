@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import './index.css';
 
@@ -7,6 +7,7 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission, onTrac
   const [song, setSong] = useState('');
   const [tracks, setTracks] = useState([]);
   const [selectedTrackUri, setSelectedTrackUri] = useState('');
+  const [token, setToken] = useState('');
 
   const songInputRef = useRef(null);
   const artistInputRef = useRef(null);
@@ -29,16 +30,19 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission, onTrac
     onTrackSelection(uri); // Call the onTrackSelection function passed from App component
   };
 
-  const fetchSpotifyToken = async () => {
-    try {
-      const response = await axios.get('/.netlify/functions/getSpotifyToken');
-      console.log('Fetched Token:', response.data.token); // Log the fetched token
-      return response.data.token;
-    } catch (error) {
-      console.error('Error fetching Spotify token:', error);
-    }
-  };
-  
+  useEffect(() => {
+    const fetchSpotifyToken = async () => {
+      try {
+        const response = await axios.get('/.netlify/functions/getSpotifyToken');
+        console.log('Fetched Token:', response.data.token); // Log the fetched token
+        setToken(response.data.token);
+      } catch (error) {
+        console.error('Error fetching Spotify token:', error);
+      }
+    };
+
+    fetchSpotifyToken();
+  }, []);
 
   const handleSearch = async () => {
     const song = songInputRef.current ? songInputRef.current.value : '';
@@ -51,8 +55,11 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission, onTrac
     setHasSelectedTrack(false);
 
     try {
-      const token = await fetchSpotifyToken();
-      console.log('Using Token:', token);
+      if (!token) {
+        console.log('Spotify token not available');
+        return;
+      }
+      console.log('Using Token:', token); 
 
       // Fetch lyrics from Lyrics.ovh
       const lyricsRes = await axios.get(`https://api.lyrics.ovh/v1/${encodeURIComponent(artist)}/${encodeURIComponent(song)}`);
@@ -68,7 +75,7 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission, onTrac
       // Fetch tracks from Spotify
       const response = await axios.get('https://api.spotify.com/v1/search', {
         params: { q: `${artist} ${song}`, type: 'track', limit: 5 },
-        headers: { Authorization: `Bearer ${import.meta.env.VITE_SPOTIFY_TOKEN}` },
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       setTracks(response.data.tracks.items);
