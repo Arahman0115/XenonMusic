@@ -1,4 +1,3 @@
-#spottoken.py
 import os
 import base64
 from requests import post
@@ -13,7 +12,7 @@ client_secret = os.getenv('VITE_SPOTIFY_CLIENT_SECRET')
 
 def get_token():
     if not client_id or not client_secret:
-        raise ValueError("Missing SPOTIFY_CLIENT_ID or SPOTIFY_CLIENT_SECRET environment variables")
+        raise ValueError("Missing VITE_SPOTIFY_CLIENT_ID or VITE_SPOTIFY_CLIENT_SECRET environment variables")
     
     url = "https://accounts.spotify.com/api/token"
     auth_string = client_id + ":" + client_secret
