@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predev": "node netlify/functions/getSpotifyToken.js",
+    "fetch-token": "node netlify/functions/getSpotifyToken.js",
     "server": "nodemon musixmatchproxy.js",
-    "netlify": "./node_modules/netlify-cli",
-    "dev": "concurrently \"npm:server\" \"vite\"",
+    "netlify": "netlify",
+    "dev": "npm run fetch-token && concurrently \"npm run server\" \"vite\"",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
