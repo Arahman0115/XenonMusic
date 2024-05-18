@@ -8,15 +8,15 @@
 
 
 .theme-spotify {
-  --header-bg: #1db954; /* Spotify Green */
+  --header-bg: #067847; /* Spotify Green */
   --header-color: #ffffff; /* White */
   --bg-color: #121212; /* Dark Background */
   --h2-color: #ffffff; /* White */
   --p-color: #b3b3b3; /* Light Gray */
   --input-bg: #333333; /* Dark Gray */
-  --button-bg: #1db954; /* Spotify Green */
+  --button-bg: #067847; /* Spotify Green */
   --button-color: #ffffff; /* White */
-  --select-bg: #333333; /* Dark Gray */
+  --select-bg: #000000; /* Dark Gray */
   --about-content-bg: #181818; /* Slightly Lighter Dark Background */
   --about-content-bg-text: #ffffff; /* White */
   --song-cont-bg: #181818; /* Slightly Lighter Dark Background */
@@ -28,8 +28,13 @@
   --select-color: #ffffff; /* White */
   --page-background-color:  #1b1919;
   --font-family: 'Briem', 'Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif';
-  
+  --lyrics-container-gradient: linear-gradient(180deg, #067847 0%, #212423 100%);
+  --lyrics-text-gradient: linear-gradient(180deg, #067847 0%, #212423 100%);
+  --buton-hover-border: #067847; /* Spotify Green */
+  --animation-red-blue: changeBackgroundRed 10s infinite;
+  --selection-box-color: #067847; /* Spotify Green */
 }
+
 /* Dark theme */
 .theme-default {
   --header-bg: #000000;
@@ -356,7 +361,7 @@ input:focus {
   font-size: 18px;
   /*background-color: #22b3b1;*/
   border-radius: 5px;
-
+  background-color: var(--h1-bg-color);
   cursor: pointer;
   outline: none;
   position: relative;
