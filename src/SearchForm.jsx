@@ -29,14 +29,7 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission, onTrac
     onTrackSelection(uri); // Call the onTrackSelection function passed from App component
   };
 
-  const fetchSpotifyToken = async () => {
-    try {
-      const response = await axios.get('/.netlify/functions/getSpotifyToken');
-      return response.data.token;
-    } catch (error) {
-      console.error('Error fetching Spotify token:', error);
-    }
-  };
+
   
 
   const handleSearch = async () => {
@@ -50,8 +43,6 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission, onTrac
     setHasSelectedTrack(false);
 
     try {
-      const token = await fetchSpotifyToken();
-      console.log(token);
 
       // Fetch lyrics from Lyrics.ovh
       const lyricsRes = await axios.get(`https://api.lyrics.ovh/v1/${encodeURIComponent(artist)}/${encodeURIComponent(song)}`);
@@ -67,7 +58,7 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission, onTrac
       // Fetch tracks from Spotify
       const response = await axios.get('https://api.spotify.com/v1/search', {
         params: { q: `${artist} ${song}`, type: 'track', limit: 5 },
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${import.meta.env.VITE_SPOTIFY_TOKEN}` },
       });
 
       setTracks(response.data.tracks.items);

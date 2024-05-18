@@ -12,7 +12,7 @@ client_secret = os.getenv('VITE_SPOTIFY_CLIENT_SECRET')
 
 def get_token():
     if not client_id or not client_secret:
-        raise ValueError("Missing VITE_SPOTIFY_CLIENT_ID or VITE_SPOTIFY_CLIENT_SECRET environment variables")
+        raise ValueError("Missing SPOTIFY_CLIENT_ID or SPOTIFY_CLIENT_SECRET environment variables")
     
     url = "https://accounts.spotify.com/api/token"
     auth_string = client_id + ":" + client_secret
@@ -31,8 +31,23 @@ def get_token():
     token = json_response.get("access_token")
     return token
 
+def update_env_file(token):
+    env_file_path = '.env'
+    with open(env_file_path, 'r') as file:
+        lines = file.readlines()
+    
+    with open(env_file_path, 'w') as file:
+        for line in lines:
+            if line.startswith('VITE_SPOTIFY_TOKEN='):
+                file.write(f'VITE_SPOTIFY_TOKEN={token}\n')
+            else:
+                file.write(line)
+        if not any(line.startswith('VITE_SPOTIFY_TOKEN=') for line in lines):
+            file.write(f'\nVITE_SPOTIFY_TOKEN={token}\n')
+
 try:
     token = get_token()
-    print(token)
+    update_env_file(token)
+    print(f"Spotify token retrieved and updated successfully: {token}")
 except Exception as e:
     print(f"Error retrieving Spotify token: {str(e)}")
