@@ -1,3 +1,13 @@
+// File: netlify/functions/refreshSpotifyToken-schedule.js
+
+// The cron expression to run the function every hour
+// Netlify Scheduled Functions use an annotation for the schedule
+
+/**
+ * @netlify/function-schedule
+ * "0 * * * *"
+ */
+
 import { PythonShell } from 'python-shell';
 import fs from 'fs';
 import path from 'path';
