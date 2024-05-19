@@ -4,18 +4,9 @@ import path from 'path';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 
-// Correctly get __filename and __dirname
-let __filename;
-let __dirname;
-
-if (typeof fileURLToPath === 'function') {
-  __filename = fileURLToPath(import.meta.url);
-  __dirname = path.dirname(__filename);
-} else {
-  // Fallback for environments where fileURLToPath is not available
-  __filename = __filename || process.cwd();
-  __dirname = __dirname || process.cwd();
-}
+// Ensure __filename and __dirname are only set once globally
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Ensure dotenv config is loaded
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
@@ -41,4 +32,10 @@ async function updateEnvFile() {
   }
 }
 
-updateEnvFile();
+export async function handler(event, context) {
+  await updateEnvFile();
+  return {
+    statusCode: 200,
+    body: 'Spotify token refreshed successfully.',
+  };
+}
