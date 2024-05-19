@@ -12,18 +12,13 @@ import { PythonShell } from 'python-shell';
 import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
-import { fileURLToPath } from 'url';
-
-// Ensure __filename and __dirname are only set once globally
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // Ensure dotenv config is loaded
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+dotenv.config({ path: path.resolve('../../.env') });
 
 function runPythonScript() {
   return new Promise((resolve, reject) => {
-    PythonShell.run(path.join(__dirname, 'spottoken.py'), null, function (err, result) {
+    PythonShell.run(path.join(process.cwd(), 'netlify/functions/spottoken.py'), null, function (err, result) {
       if (err) {
         return reject(err);
       }
