@@ -9,8 +9,6 @@
 [build.environment]
   PYTHON_VERSION = "3.8"
 
-# Schedule the token refresh every hour
-[[plugins]]
-  package = "@netlify/plugin-scheduled-functions"
-  [plugins.inputs]
-    hourly = ["getSpotifyToken"]
+[[functions]]
+  schedule = "0 * * * *"  # Runs every hour
+  path = "refreshSpotifyToken"
