@@ -3,16 +3,20 @@ import base64
 from requests import post
 import json
 from dotenv import load_dotenv
+from pathlib import Path
 
 # Load environment variables from .env file
-load_dotenv()
+env_path = Path(__file__).resolve().parents[3] / 'vite-project' / '.env'
+
+# Load environment variables from .env file
+load_dotenv(dotenv_path=env_path)
 
 client_id = os.getenv('VITE_SPOTIFY_CLIENT_ID')
 client_secret = os.getenv('VITE_SPOTIFY_CLIENT_SECRET')
 
 def get_token():
     if not client_id or not client_secret:
-        raise ValueError("Missing SPOTIFY_CLIENT_ID or SPOTIFY_CLIENT_SECRET environment variables")
+        raise ValueError("Missing VITE_SPOTIFY_CLIENT_ID or VITE_SPOTIFY_CLIENT_SECRET environment variables")
     
     url = "https://accounts.spotify.com/api/token"
     auth_string = client_id + ":" + client_secret
@@ -32,18 +36,21 @@ def get_token():
     return token
 
 def update_env_file(token):
-    env_file_path = '.env'
-    with open(env_file_path, 'r') as file:
+    with open(env_path, 'r') as file:
         lines = file.readlines()
     
-    with open(env_file_path, 'w') as file:
+    with open(env_path, 'w') as file:
+        token_updated = False
         for line in lines:
             if line.startswith('VITE_SPOTIFY_TOKEN='):
                 file.write(f'VITE_SPOTIFY_TOKEN={token}\n')
+                token_updated = True
             else:
                 file.write(line)
-        if not any(line.startswith('VITE_SPOTIFY_TOKEN=') for line in lines):
+        
+        if not token_updated:
             file.write(f'\nVITE_SPOTIFY_TOKEN={token}\n')
+            print('Token updated in .env file')
 
 try:
     token = get_token()

@@ -33,7 +33,7 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission, onTrac
   useEffect(() => {
     const fetchSpotifyToken = async () => {
       try {
-        const response = await axios.get('/.netlify/functions/getSpotifyToken');
+        const response = await axios.get('/.netlify/functions/getSpotifyToken-schedule.mjs');
         console.log('Fetched Token:', response.data.token); // Log the fetched token
         setToken(response.data.token);
       } catch (error) {

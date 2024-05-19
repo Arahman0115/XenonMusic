@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "fetch-token": "node netlify/functions/getSpotifyToken-schedule.mjs",
+    "fetch-token": "node netlify/functions/refreshSpotifyToken.js",
+    "server": "nodemon musixmatchproxy.js",
     "netlify": "netlify",
-    "dev": "npm run fetch-token && concurrently \"vite\"",
+    "dev": "npm run fetch-token && concurrently \"npm run server\" \"vite\"",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
