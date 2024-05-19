@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "fetch-token": "node netlify/functions/getSpotifyToken.js",
+    "fetch-token": "node netlify/functions/getSpotifyToken-schedule.mjs",
     "netlify": "netlify",
     "dev": "npm run fetch-token && concurrently \"vite\"",
     "build": "vite build",
