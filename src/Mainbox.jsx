@@ -92,7 +92,6 @@ function MainBox({ lyrics, selectedText, setMainBoxContent, hasSelectedTrack }) 
     async function processMessageToChatGPT(chatMessages) {
         const API_KEY = openAIKey;
         let apiMessages = chatMessages.map((messageObject) => {
-            console.log("submitting via key:", openAIKey)
             let role = "";
             if (messageObject.sender === "ChatGPT") {
                 messageObject.message = messageObject.message.split('\n').join(' ');

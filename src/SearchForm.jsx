@@ -55,7 +55,6 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission, onTrac
             timestamp: now.getTime()
           }));
           setToken(response.data.token);
-          console.log('Fetched Token:', response.data.token);
         }
       } catch (error) {
         console.error('Error fetching Spotify token:', error);
@@ -92,7 +91,6 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission, onTrac
             setLoading(false);  // Stop loading if token is not available
             return;
         }
-        console.log('Using Token:', token); 
 
         // Fetch lyrics from Lyrics.ovh
         const lyricsRes = await axios.get(`https://api.lyrics.ovh/v1/${encodeURIComponent(artist)}/${encodeURIComponent(song)}`);
