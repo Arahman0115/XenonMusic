@@ -29,20 +29,29 @@ function SearchForm({ onSearchResults, onLibraryPage, onLyricsSubmission, onTrac
     setTracks([]); // This will hide the track list
     onTrackSelection(uri); // Call the onTrackSelection function passed from App component
   };
-
+  
   useEffect(() => {
     const fetchSpotifyToken = async () => {
       try {
-        const response = await axios.get('/.netlify/functions/getSpotifyToken-schedule.mjs');
-        console.log('Fetched Token:', response.data.token); // Log the fetched token
+        // Change URL as per your Netlify function's endpoint
+        const response = await axios.get('/.netlify/functions/refreshSpotifyToken');
+        console.log('Fetched Token:', response.data.token);
         setToken(response.data.token);
       } catch (error) {
         console.error('Error fetching Spotify token:', error);
       }
     };
 
+    // Immediate fetch on mount
     fetchSpotifyToken();
+
+    // Set up interval to refresh token every hour
+    const intervalId = setInterval(fetchSpotifyToken, 3600000); // 3600000 ms = 1 hour
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
   }, []);
+
 
   const handleSearch = async () => {
     const song = songInputRef.current ? songInputRef.current.value : '';

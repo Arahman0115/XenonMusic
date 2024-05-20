@@ -5,12 +5,9 @@
 
 [functions]
   node_bundler = "esbuild"
+  included_files = ["**/*.js", "**/*.mjs"]
+  node_env = { ESBUILD_FORCE_KEEP_IMPORT_META = "true" }
+  
 
 [build.environment]
   PYTHON_VERSION = "3.8"
-
-[[plugins]]
-  package = "@netlify/plugin-scheduled-functions"
-
-[scheduled_functions]
-  refreshSpotifyToken = "0 */1 * * *"

@@ -4,13 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "fetch-token": "node netlify/functions/refreshSpotifyToken.js",
     "server": "nodemon musixmatchproxy.js",
-    "netlify": "netlify",
-    "dev": "npm run fetch-token && concurrently \"npm run server\" \"vite\"",
+    "netlify": "netlify dev",
+    "dev": "vite",
     "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
     "@react-three/drei": "^9.105.6",
@@ -27,7 +26,6 @@
     "lrc-parser": "^1.0.1",
     "nodemon": "^3.1.0",
     "path": "^0.12.7",
-    "python-shell": "^5.0.0",
     "qs": "^6.12.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
