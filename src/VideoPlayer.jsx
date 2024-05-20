@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import './VideoPlayer.css'
 
 const VideoPlayer = ({ videoId, track, className, onBgColorChange }) => {
   const [embedUrl, setEmbedUrl] = useState(null);
@@ -45,11 +46,11 @@ const VideoPlayer = ({ videoId, track, className, onBgColorChange }) => {
   }, [embedUrl, onBgColorChange]);
 
   return (
-    <div className="flex justify-center mt-10">
+    <div className="videoplayer rounded-2xl flex justify-center mt-10">
       {embedUrl && (
         <iframe
           ref={iframeRef}
-          className={className}
+          className={'iframe'}
           src={embedUrl}
           width="100%"
           height="352"
