@@ -1,13 +1,9 @@
 [build]
   functions = "netlify/functions"
-  command = "pip install -r netlify/functions/requirements.txt && echo 'Python packages installed' && python --version && python3 --version && echo 'Python versions listed' && which python && which python3 && echo 'Python paths listed' && echo $PATH && npm run build"
+  command = "npm run build"
   publish = "dist"
 
 [functions]
   node_bundler = "esbuild"
   included_files = ["**/*.js", "**/*.mjs"]
   node_env = { ESBUILD_FORCE_KEEP_IMPORT_META = "true" }
-  
-
-[build.environment]
-  PYTHON_VERSION = "3.8"
