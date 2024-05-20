@@ -3,26 +3,21 @@ const { promisify } = require('util');
 
 const execFilePromise = promisify(execFile);
 
-async function getPythonExecutable() {
-  // Locally use 'python', on Netlify (or other environments), use 'python3'
-  const isNetlify = process.env.NETLIFY; // Netlify sets this environment variable
-  return isNetlify ? 'python3' : 'python';
-}
-
 exports.handler = async function(event, context) {
   try {
-    const pythonExecutable = await getPythonExecutable();
-    const { stdout } = await execFilePromise(pythonExecutable, ['spottoken.py']);
+    console.log("Attempting to execute Python script...");
+    const { stdout } = await execFilePromise('python', ['spottoken.py']);
     const token = stdout.trim();
+    console.log("Python script executed successfully:", token);
     return {
       statusCode: 200,
       body: JSON.stringify({ token }),
     };
   } catch (error) {
-    console.error('Error retrieving Spotify token:', error);
+    console.error("Failed to execute Python script:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Failed to retrieve Spotify token', details: error.message }),
+      body: JSON.stringify({ error: "Failed to retrieve Spotify token", details: error.toString() }),
     };
   }
 };

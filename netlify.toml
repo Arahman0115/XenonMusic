@@ -1,6 +1,6 @@
 [build]
   functions = "netlify/functions"
-  command = "pip install -r netlify/functions/requirements.txt && npm run build && python --version && python3 --version && echo $PATH"
+  command = "pip install -r netlify/functions/requirements.txt && echo 'Python packages installed' && python --version && python3 --version && echo 'Python versions listed' && which python && which python3 && echo 'Python paths listed' && echo $PATH && npm run build"
   publish = "dist"
 
 [functions]
