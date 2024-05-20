@@ -1,61 +1,21 @@
-
-/* Area where messages are displayed */
-.response-area {
-    background-color: var(--selection-box-color); /* Color of the chat area */
-    padding: 15px;
-    margin-bottom: 20px;
-    overflow-y: auto; /* Allows scrolling */
-    max-height: 400px; /* Limits maximum height */
-    border-radius: 8px;
-}
-
-/* Styling for individual messages */
-.message {
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    position: relative;
-}
-
-/* Differentiates messages from the user and GPT */
-.gpt-message {
-    text-align: left;
-    border-left: var(--button-bg) 3px solid;
-}
-
-.user-message {
-    text-align: right;
-    border-right: var(--header-color) 3px solid;
-}
-
-/* Sender's name styling */
-.sender {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-/* Message content styling */
-
-
 /* Input area styling */
 .prompt-area {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
 }
 
-
-
-.textareachat {
+.input-wrapper {
+    display: flex;
+    align-items: center;
     width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    resize: none; /* Disables resizing of the textarea */
+    margin-top: 30px;
+    margin-left: 5px;
+ 
 }
 
 /* Styling for buttons */
-button {
+ .clear {
     background-color: var(--selection-box-color);
     color: white;
     border: none;
@@ -64,21 +24,59 @@ button {
     cursor: pointer;
     margin-left: 10px;
 }
+.submit {
+    background-color: var(--selection-box-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 0px;
+    margin-top: 5px;
+    margin-right: 190px;
+}
+.submit:hover {
+    background-color: rgb(188, 169, 169);
+    color: rgb(188, 181, 181);
+    border: solid 2px white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 0px;
+    margin-top: 5px;
+    margin-right: 190px;
+}
+.submit img:hover {
+    background-color: rgb(188, 169, 169);
+}
+.clear {
+    margin-left: 10px; /* Space between textarea and clear button */
+    margin-right: 0; /* Remove right margin for the last button */
+}
+
+.textareachat {
+    width: calc(100% - 80px); /* Adjust width to make room for buttons */
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: none; /* Disables resizing of the textarea */
+}
+
 @keyframes typing {
     from { width: 0 }
     to { width: 100% }
-  }
-  
-  @keyframes blink-caret {
+}
+
+@keyframes blink-caret {
     from, to { border-color: transparent }
     50% { border-color: black }
-  }
-  
-  .typing {
+}
+
+.typing {
     display: inline-block;
     overflow: hidden; /* Ensures the content is clipped */
     border-right: .15em solid black; /* The caret */
     white-space: nowrap; /* Keeps the content on a single line */
     width: 0; /* Start with 0 width and expand */
     animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
-  }
+}

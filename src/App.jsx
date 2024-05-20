@@ -182,7 +182,7 @@ function App() {
                 </div>
               </div>
             </div>
-            <div className='overflow-auto h-[800px] py-5 px-10 mt-5'>
+            <div className='overflow-auto h-[800px] py-1 px-10 mt-20'>
             <h2 className='ml-10 text-center mb-5 mt-20'> Lyrics Interpreter GPT</h2>
               <MainBox 
               hasSelectedTrack={hasSelectedTrack}

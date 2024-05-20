@@ -92,6 +92,7 @@ function MainBox({ lyrics, selectedText, setMainBoxContent, hasSelectedTrack }) 
     async function processMessageToChatGPT(chatMessages) {
         const API_KEY = openAIKey;
         let apiMessages = chatMessages.map((messageObject) => {
+            console.log("submitting via key:", openAIKey)
             let role = "";
             if (messageObject.sender === "ChatGPT") {
                 messageObject.message = messageObject.message.split('\n').join(' ');
@@ -175,8 +176,9 @@ function MainBox({ lyrics, selectedText, setMainBoxContent, hasSelectedTrack }) 
                     <button className="submit ml-10 bg-red-500 mb-5" type="submit" onClick={handleSend}>
                         <img src={sendButton} />
                     </button>
+                    <button className="clear " type="submit" onClick={clearMessages}>Clear</button>
                 </div>
-                <button className="clear mr-10 mb-5" type="submit" onClick={clearMessages}>Clear</button>
+                
             </div>
         </div>
     );
