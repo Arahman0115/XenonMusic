@@ -3,12 +3,21 @@ const { promisify } = require('util');
 
 const execFilePromise = promisify(execFile);
 
+async function getPythonExecutable() {
+    // Check if the NETLIFY environment variable is set, which is true on Netlify
+    if (process.env.NETLIFY) {
+        return 'python3'; // Netlify uses 'python3'
+    } else {
+        return 'python'; // Locally use 'python'
+    }
+}
+
 exports.handler = async function(event, context) {
   try {
-    console.log("Attempting to execute Python script...");
-    const { stdout } = await execFilePromise('python', ['spottoken.py']);
+    const pythonExecutable = await getPythonExecutable();
+    const { stdout } = await execFilePromise(pythonExecutable, ['spottoken.py']);
     const token = stdout.trim();
-    console.log("Python script executed successfully:", token);
+    console.log("Token retrieved:", token);
     return {
       statusCode: 200,
       body: JSON.stringify({ token }),
