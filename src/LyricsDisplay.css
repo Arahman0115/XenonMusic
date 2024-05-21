@@ -1,5 +1,5 @@
 .lyrics-display {
-  background: var(--lyrics-container-gradient);
+  background: var(--input-bg);
   color: white;
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(234, 1, 1, 0.1);
@@ -9,10 +9,10 @@
 
 @keyframes glow2 {
   0%, 100% {
-    box-shadow: inset 0 0 2px #bb0d0a, 0 0 2px #c50606; /* Subtle glow */
+    box-shadow: inset 0 0 2px #000000, 0 0 2px #2a0101; /* Subtle glow */
   }
   50% {
-    box-shadow: inset 0 0 2px #fb0000, 0 1px 2px #ff0000; /* Brighter glow */
+    box-shadow: inset 0 0 2px #000000, 0 1px 2px #0c0000; /* Brighter glow */
   }
 }
 
@@ -54,7 +54,6 @@
 
 .lyrics-line {
   padding: 5px 5px 5px;
-  display:inline-block;
   font-weight: bold; /* Make text bold */
   opacity: 0; /* Start with hidden */
   animation: scaleUpAndDown 1.2s ease-in-out forwards; /* Apply scaling animation */
@@ -75,7 +74,16 @@
   cursor: crosshair;
   width: 100%;
 }
+.lyrictext {
+  font-family: 'Briem';
+  font-size: 20px;
+  font-weight: bold;
+  color: #250000 !important;
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
 
+}
 @keyframes scaleUpAndDown {
   0% {
     opacity: 0;

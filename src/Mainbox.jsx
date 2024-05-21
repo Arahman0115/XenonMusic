@@ -8,20 +8,24 @@ function MainBox({ lyrics, selectedText, setMainBoxContent, hasSelectedTrack }) 
     const [clearingMessages, setClearingMessages] = useState(false);
     const [hasCleared, setHasCleared] = useState(false);
 
-    const [messages, setMessages] = useState([
-        {
-            message: "Hello I am your Personal Lyrics Interpreter",
-            sender: "LyricsInterpreterGPT"
-        }
-    ]);
+    const [messages, setMessages] = useState(() => {
+        const savedMessages = localStorage.getItem('messages');
+        return savedMessages ? JSON.parse(savedMessages) : [
+            {
+                message: "Hello I am your Personal Lyrics Interpreter",
+                sender: "LyricsInterpreterGPT"
+            }
+        ];
+    });
 
     const handleChange = (event) => {
         setInput(event.target.value);
     };
 
     useEffect(() => {
-        if (lyrics && hasSelectedTrack) {
+        if (lyrics && hasSelectedTrack && !localStorage.getItem('lyricsSubmitted')) {
             handleLyricsSubmission(lyrics);
+            localStorage.setItem('lyricsSubmitted', 'true');
             console.log("Lyrics submission triggered");
         }
     }, [lyrics, hasSelectedTrack]);
@@ -32,6 +36,10 @@ function MainBox({ lyrics, selectedText, setMainBoxContent, hasSelectedTrack }) 
             console.log("Selected text submission triggered");
         }
     }, [selectedText, hasCleared]);
+
+    useEffect(() => {
+        localStorage.setItem('messages', JSON.stringify(messages));
+    }, [messages]);
 
     const clearMessages = () => {
         setClearingMessages(true);
@@ -44,6 +52,13 @@ function MainBox({ lyrics, selectedText, setMainBoxContent, hasSelectedTrack }) 
             ]);
             setClearingMessages(false);
             setHasCleared(true);
+            localStorage.removeItem('lyricsSubmitted');
+            localStorage.setItem('messages', JSON.stringify([
+                {
+                    message: "Hello I am your Personal Lyrics Interpreter",
+                    sender: "LyricsInterpreterGPT"
+                }
+            ]));
         }, 500);
     };
 
@@ -93,7 +108,7 @@ function MainBox({ lyrics, selectedText, setMainBoxContent, hasSelectedTrack }) 
         const API_KEY = openAIKey;
         let apiMessages = chatMessages.map((messageObject) => {
             let role = "";
-            if (messageObject.sender === "ChatGPT") {
+            if (messageObject.sender === "LyricsInterpreterGPT") {
                 messageObject.message = messageObject.message.split('\n').join(' ');
                 role = "assistant";
             } else {
@@ -104,7 +119,7 @@ function MainBox({ lyrics, selectedText, setMainBoxContent, hasSelectedTrack }) 
 
         const systemMessage = {
             role: "system",
-            content: "You are a knowledgeable and insightful lyrics interpreter. Your role is to provide a summary of the overall meaning of the songs presented to you. If the user sends a messages in the romanized foreign language, respond in romanized language that the message was sent in. Additionally, you should provide detailed analyses of song lines that are ambiguous, complex, or have a deep meaning, when doing this, use a separate paragraph or section for each line that you are analyzing. Your explanations should be clear and easy to understand, helping the user to gain a deeper appreciation of the song's lyrics."
+            content: "You are a knowledgeable and insightful lyrics interpreter. Your role is to provide a summary of the overall meaning of the songs presented to you. If the user sends a message in the romanized foreign language, respond in the romanized language that the message was sent in. Additionally, you should provide detailed analyses of song lines that are ambiguous, complex, or have a deep meaning. When doing this, use a separate paragraph or section for each line that you are analyzing. Your explanations should be clear and easy to understand, helping the user to gain a deeper appreciation of the song's lyrics."
         };
 
         const apiRequestBody = {
@@ -175,7 +190,7 @@ function MainBox({ lyrics, selectedText, setMainBoxContent, hasSelectedTrack }) 
                     <button className="submit ml-10 bg-red-500 mb-5" type="submit" onClick={handleSend}>
                         <img src={sendButton} />
                     </button>
-                    <button className="clear " type="submit" onClick={clearMessages}>Clear</button>
+                    <button className="clear " type="button" onClick={clearMessages}>Clear</button>
                 </div>
                 
             </div>

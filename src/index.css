@@ -50,13 +50,14 @@
   --buton-hover-border: #067847; /* Spotify Green */
   --animation-red-blue: changeBackgroundRed 10s infinite;
   --selection-box-color: #067847; /* Spotify Green */
+  --box-shadow-color: 0 4px 15px rgba(234, 1, 1, 0.1);
 }
 
 /* Dark theme */
 .theme-default {
   --header-bg: #000000;
   --select-bg: #000000;
-  --h1-bg-color: #510000;
+  --h1-bg-color: #270101;
   --header-color: #5f0000;
   --bg-color: #5c0303;
   --lyrics-container-gradient: linear-gradient(180deg, #3f0404 0%, #2a0101 100%);
@@ -82,6 +83,7 @@
   --about-container-bg: #000000;
   --fun-fact-bg: #000000;
   --font-family: Briem, 'Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif';
+  --box-shadow-color: 0 4px 15px rgba(255, 0, 0, 0.2);
 }
 
 /* Light theme */
@@ -321,18 +323,28 @@ h1 {
   text-align: center;
   animation: slideIn 0.5s ease-in-out;
 }
-.xenon-text {
-  font-size: 8rem;/* Red color */
-  text-align: start;
-  margin-top: 2rem; /* Adjust margin-top as needed */
-  margin-left: 15rem; /* Adjust margin-left as needed */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow effect */
-  z-index: 9999;
-  animation: slideIn 0.5s ease-in-out;
-  
 
+@keyframes shine {
+  0% {
+    background-position: -200%;
+  }
+  100% {
+    background-position: 200%;
+  }
 }
 
+#xenon-text {
+
+  margin-top: 2rem; /* Adjust margin-top as needed */
+  margin-left: 10rem; 
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(129, 0, 0, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+  background-size: 200% auto;
+  color: #ca0000; /* Text color */
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 6s linear infinite;
+}
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -721,4 +733,10 @@ input:focus {
   white-space: nowrap; /* Keeps the content on a single line */
   animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
   max-width: 100%;
+}
+.songinput {
+  box-shadow: var(--box-shadow-color);
+}
+.artistinput {
+  box-shadow: var(--box-shadow-color);
 }

@@ -68,7 +68,7 @@ function LyricsDisplay({ lyrics, videoId, songName, artistName, trackUri, mainBo
 
   return (
     <div className="lyrics-display text-center flex flex-col px-5 py-5 mx-5 rounded-lg shadow-lg text-white">
-      <h2 className="text-4xl font-bold mb-5">Lyrics</h2>
+      <h2 className="lyricstext text-4xl font-bold mb-5">Lyrics</h2>
       <div className="lyrics-container mx-auto max-w-xl overflow-y-auto max-h-80 p-4 bg-white text-black rounded-lg shadow-inner" onMouseUp={handleTextSelection}>
         {lines.map((line, index) => (
           <p 
